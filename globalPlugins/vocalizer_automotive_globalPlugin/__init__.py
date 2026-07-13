@@ -9,8 +9,6 @@ import os
 import shutil
 import webbrowser
 
-import audioDucking
-import config
 import configobj
 import wx
 import addonHandler
@@ -18,9 +16,7 @@ import globalPluginHandler
 import globalVars
 import gui
 import languageHandler
-import synthDriverHandler
 from logHandler import log
-from speech import extensions as speechExtensions
 
 addonHandler.initTranslation()
 
@@ -107,106 +103,12 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		super(GlobalPlugin, self).__init__()
 		self.submenu_vocalizer = None
 		self.menuItem = None
-		self._audioDucker = None
-		self._audioDuckingHooksRegistered = False
 		if globalVars.appArgs.secure:
 			return
-		self._registerAudioDuckingHooks()
 		try:
 			self.createMenu()
 		except Exception:
 			log.error("Unable to create Vocalizer Automotive menu.", exc_info=True)
-
-	def _registerAudioDuckingHooks(self):
-		self._audioDuckingHooksRegistered = True
-		try:
-			synthDriverHandler.pre_synthSpeak.register(self._onPreSynthSpeak)
-			synthDriverHandler.synthDoneSpeaking.register(self._onSynthDoneSpeaking)
-			synthDriverHandler.synthChanged.register(self._onSynthChanged)
-			speechExtensions.speechCanceled.register(self._onSpeechCanceled)
-		except Exception:
-			self._unregisterAudioDuckingHooks()
-			log.error(
-				"Unable to register Automotive audio ducking hooks.",
-				exc_info=True,
-			)
-
-	def _unregisterAudioDuckingHooks(self):
-		if not self._audioDuckingHooksRegistered:
-			return
-		for extensionPoint, handler in (
-			(synthDriverHandler.pre_synthSpeak, self._onPreSynthSpeak),
-			(synthDriverHandler.synthDoneSpeaking, self._onSynthDoneSpeaking),
-			(synthDriverHandler.synthChanged, self._onSynthChanged),
-			(speechExtensions.speechCanceled, self._onSpeechCanceled),
-		):
-			try:
-				extensionPoint.unregister(handler)
-			except Exception:
-				log.debugWarning(
-					"Unable to unregister Automotive audio ducking hook.",
-					exc_info=True,
-				)
-		self._audioDuckingHooksRegistered = False
-
-	def _isAutomotiveSynth(self, synth=None):
-		if synth is None:
-			synth = synthDriverHandler.getSynth()
-		return getattr(synth, "name", "") == BRIDGE_SYNTH_NAME
-
-	def _audioDuckingIsEnabled(self):
-		try:
-			mode = config.conf["audio"].get("audioDuckingMode", 0)
-			return int(mode) != int(audioDucking.AudioDuckingMode.NONE)
-		except Exception:
-			log.debugWarning(
-				"Unable to read the NVDA audio ducking mode.",
-				exc_info=True,
-			)
-			return False
-
-	def _releaseAudioDucking(self):
-		ducker = self._audioDucker
-		self._audioDucker = None
-		if ducker is None:
-			return
-		try:
-			ducker.disable()
-		except Exception:
-			log.debugWarning(
-				"Unable to release Automotive audio ducking.",
-				exc_info=True,
-			)
-
-	def _onPreSynthSpeak(self, speechSequence):
-		if not self._isAutomotiveSynth():
-			self._releaseAudioDucking()
-			return
-		if not self._audioDuckingIsEnabled():
-			return
-		try:
-			if not audioDucking.isAudioDuckingSupported():
-				return
-			if self._audioDucker is not None:
-				return
-			self._audioDucker = audioDucking.AudioDucker()
-			if not self._audioDucker.enable():
-				self._releaseAudioDucking()
-		except Exception:
-			self._releaseAudioDucking()
-			log.debugWarning(
-				"Automotive audio ducking could not be enabled.",
-				exc_info=True,
-			)
-
-	def _onSynthDoneSpeaking(self, synth):
-		self._releaseAudioDucking()
-
-	def _onSynthChanged(self, synth, **kwargs):
-		self._releaseAudioDucking()
-
-	def _onSpeechCanceled(self):
-		self._releaseAudioDucking()
 
 	def createMenu(self):
 		self.removeMenu()
@@ -385,8 +287,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		)
 
 	def terminate(self):
-		self._releaseAudioDucking()
-		self._unregisterAudioDuckingHooks()
 		try:
 			self.removeMenu()
 		except Exception:
