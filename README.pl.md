@@ -3,10 +3,13 @@
 [English](README.md) | Polski | [Slovenčina](README.sk.md)
 
 Projekt dostosowuje starszy, 32-bitowy sterownik Nuance Vocalizer Automotive
-5.5 do 64-bitowych wersji NVDA od 2026.1 wzwyż.
+5.5 do 64-bitowych wersji NVDA od 2026.2 wzwyż.
 
 Most uruchamia oryginalny sterownik 32-bitowy w dedykowanym hoście
 syntezatora NVDA za pomocą standardowego mostu zgodności NVDA.
+
+Ta gałąź zawiera wariant brokered audio i wymaga NVDA 2026.2 lub nowszego.
+Dla NVDA 2026.1 użyj gałęzi `main` i wydania `v2.1.9`.
 
 ## Ważne
 
@@ -51,9 +54,9 @@ Projekt nie jest powiązany z NV Access, Tiflotecnia, Nuance ani Cerence.
 
 ## Przetwarzanie dźwięku
 
-To wydanie używa klasycznego mostu NVDA, aby zachować zgodność z NVDA 2026.1
-i nowszymi. Sonic Pitch działa niezależnie przez własny hook WavePlayer i nie
-wymaga dodatkowego proxy audio.
+To wydanie używa usługi brokered audio NVDA, aby przekazywać dźwięk mowy przez
+główny proces NVDA. Wymaga to NVDA 2026.2 lub nowszego. Sonic Pitch pozostaje
+zgodny z tą ścieżką audio.
 
 ## Warianty wydań
 

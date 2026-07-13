@@ -9,7 +9,9 @@
 <body>
 <h1>Vocalizer Automotive 5.5 Driver</h1>
 <p>This add-on bridges the legacy 32-bit Nuance Vocalizer Automotive 5.5
-driver to 64-bit NVDA 2026.1 and newer.</p>
+driver to 64-bit NVDA 2026.2 and newer.</p>
+<p>This release is the brokered-audio variant and requires NVDA 2026.2 or
+newer. Use release <code>v2.1.9</code> for NVDA 2026.1.</p>
 
 <h2>Requirements</h2>
 <p>The public package does not contain proprietary runtime DLLs, voice data or
@@ -33,8 +35,8 @@ to enter the license and configure automatic language switching.</li>
 </ol>
 
 <h2>Audio processing</h2>
-<p>This release uses the classic NVDA compatibility bridge. Sonic Pitch remains
-independent and uses its own WavePlayer hook.</p>
+<p>This release uses NVDA's brokered-audio service to route speech audio
+through the main NVDA process. Sonic Pitch remains compatible with this path.</p>
 
 <h2>Release variants</h2>
 <ul>
