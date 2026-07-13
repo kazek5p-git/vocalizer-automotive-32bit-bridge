@@ -42,15 +42,29 @@ def _calls(node):
 
 
 class GlobalPluginLifecycleTests(unittest.TestCase):
-	def test_license_import_does_not_restart_or_rebuild_menu(self):
+	def test_license_import_does_not_restart_or_destroy_menu(self):
 		calls = _calls(_load_function("onVocalizerLicenseMenu"))
 		self.assertNotIn("core.restart", calls)
-		self.assertNotIn("wx.CallAfter", calls)
 		self.assertNotIn("self.createMenu", calls)
+		self.assertIn("wx.CallAfter", calls)
 
 	def test_license_removal_does_not_rebuild_menu_from_event_handler(self):
 		calls = _calls(_load_function("onVocalizerLicenseRemoveMenu"))
 		self.assertNotIn("self.createMenu", calls)
+		self.assertIn("wx.CallAfter", calls)
+
+	def test_menu_uses_main_nvda_menu_and_does_not_destroy_submenu(self):
+		createCalls = _calls(_load_function("createMenu"))
+		removeCalls = _calls(_load_function("removeMenu"))
+		self.assertIn("self.menu.Insert", createCalls)
+		self.assertNotIn("self.removeMenu", createCalls)
+		self.assertNotIn("self.submenu_vocalizer.Destroy", createCalls | removeCalls)
+		self.assertIn("self.menu.Remove", removeCalls)
+
+	def test_reinitialize_menu_is_blocked_during_termination(self):
+		calls = _calls(_load_function("reinitializeMenu"))
+		self.assertIn("self.removeMenu", calls)
+		self.assertIn("self.createMenu", calls)
 
 	def test_terminate_does_not_destroy_wx_menu_objects(self):
 		calls = _calls(_load_function("terminate"))

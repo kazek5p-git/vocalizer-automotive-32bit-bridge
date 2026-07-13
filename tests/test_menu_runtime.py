@@ -1,11 +1,9 @@
 import builtins
 import importlib.util
 import sys
-import tempfile
 import types
 import unittest
 from pathlib import Path
-from unittest import mock
 
 
 SOURCE_PATH = (
@@ -16,9 +14,33 @@ SOURCE_PATH = (
 )
 
 
-class LicenseImportFlowTests(unittest.TestCase):
+class FakeMenu:
+	def __init__(self):
+		self.items = []
+		self.removed = []
+		self.destroyed = False
+
+	def Append(self, *args):
+		item = ("append", args)
+		self.items.append(item)
+		return item
+
+	def Insert(self, position, *args):
+		item = ("insert", position, args)
+		self.items.insert(position, item)
+		return item
+
+	def Remove(self, item):
+		self.removed.append(item)
+		self.items.remove(item)
+
+	def Destroy(self):
+		self.destroyed = True
+
+
+class MenuRuntimeTests(unittest.TestCase):
 	def _load_plugin(self):
-		packageName = "vocalizer_automotive_test_plugin"
+		packageName = "vocalizer_automotive_menu_test_plugin"
 		moduleNames = [
 			packageName,
 			f"{packageName}.dialogs",
@@ -32,6 +54,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 			"wx",
 		]
 		previousModules = {name: sys.modules.get(name) for name in moduleNames}
+		previousBuiltinTranslation = getattr(builtins, "_", None)
 
 		class BaseGlobalPlugin:
 			def terminate(self):
@@ -49,12 +72,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 		dialogs.getInstalledVoiceLocaleMap = lambda: {}
 
 		addonHandler = types.ModuleType("addonHandler")
-		previousBuiltinTranslation = getattr(builtins, "_", None)
-
-		def initTranslation():
-			builtins._ = lambda text: text
-
-		addonHandler.initTranslation = initTranslation
+		addonHandler.initTranslation = lambda: setattr(builtins, "_", lambda text: text)
 		addonHandler.getRunningAddons = lambda: []
 
 		configobj = types.ModuleType("configobj")
@@ -66,8 +84,9 @@ class LicenseImportFlowTests(unittest.TestCase):
 		globalVars = types.ModuleType("globalVars")
 		globalVars.appArgs = types.SimpleNamespace(secure=False, configPath=None)
 
+		sysTrayIcon = types.SimpleNamespace(menu=FakeMenu(), Bind=lambda *args: None)
 		gui = types.ModuleType("gui")
-		gui.mainFrame = types.SimpleNamespace()
+		gui.mainFrame = types.SimpleNamespace(sysTrayIcon=sysTrayIcon)
 
 		languageHandler = types.ModuleType("languageHandler")
 		logHandler = types.ModuleType("logHandler")
@@ -75,12 +94,14 @@ class LicenseImportFlowTests(unittest.TestCase):
 
 		wx = types.ModuleType("wx")
 		wx.ID_ANY = -1
-		wx.ID_OK = 1
+		wx.EVT_MENU = object()
 		wx.OK = 1
 		wx.ICON_ERROR = 2
 		wx.ICON_INFORMATION = 4
-		wx.FD_OPEN = 8
-		wx.FD_FILE_MUST_EXIST = 16
+		wx.YES = 8
+		wx.NO = 16
+		wx.YES_NO = wx.YES | wx.NO
+		wx.Menu = FakeMenu
 
 		package = types.ModuleType(packageName)
 		package.__path__ = [str(SOURCE_PATH.parent)]
@@ -103,59 +124,30 @@ class LicenseImportFlowTests(unittest.TestCase):
 		module = importlib.util.module_from_spec(spec)
 		sys.modules[packageName] = module
 		spec.loader.exec_module(module)
-		return (
-			module,
-			wx,
-			gui,
-			previousModules,
-			moduleNames,
-			previousBuiltinTranslation,
+		return module, sysTrayIcon, previousModules, moduleNames, previousBuiltinTranslation
+
+	def test_menu_reinitialization_removes_item_without_destroying_menu(self):
+		module, sysTrayIcon, previousModules, moduleNames, previousTranslation = (
+			self._load_plugin()
 		)
-
-	def test_license_import_copies_file_without_menu_rebuild(self):
-		(
-			module,
-			wx,
-			gui,
-			previousModules,
-			moduleNames,
-			previousBuiltinTranslation,
-		) = self._load_plugin()
 		try:
-			with tempfile.TemporaryDirectory() as tempDir:
-				sourcePath = Path(tempDir) / "source.ini"
-				targetPath = Path(tempDir) / "vocalizer_license.ini"
-				sourcePath.write_text("[info]\nusername = Test\n", encoding="utf-8")
-				dialogState = {"destroyed": False}
+			module.getLicenseInfo = lambda: "none"
+			module.getDefaultLicensePath = lambda: "missing-license.ini"
+			plugin = module.GlobalPlugin.__new__(module.GlobalPlugin)
+			plugin.menu = None
+			plugin.submenu_vocalizer = None
+			plugin.menuItem = None
+			plugin._terminating = False
 
-				class FileDialog:
-					def __init__(self, *args, **kwargs):
-						return None
+			plugin.createMenu()
+			oldMenu = plugin.submenu_vocalizer
+			oldItem = plugin.menuItem
+			plugin.reinitializeMenu()
 
-					def ShowModal(self):
-						return wx.ID_OK
-
-					def GetPath(self):
-						return str(sourcePath)
-
-					def Destroy(self):
-						dialogState["destroyed"] = True
-
-				wx.FileDialog = FileDialog
-				gui.messageBox = mock.Mock()
-				wx.CallAfter = mock.Mock()
-
-				plugin = module.GlobalPlugin.__new__(module.GlobalPlugin)
-				plugin.reinitializeMenu = mock.Mock()
-				module.getDefaultLicensePath = lambda: str(targetPath)
-				module.getLicenseInfo = lambda: f"licensed:{targetPath}"
-
-				plugin.onVocalizerLicenseMenu(object())
-
-				self.assertEqual(targetPath.read_bytes(), sourcePath.read_bytes())
-				self.assertTrue(dialogState["destroyed"])
-				gui.messageBox.assert_called_once()
-				wx.CallAfter.assert_called_once_with(plugin.reinitializeMenu)
+			self.assertEqual(sysTrayIcon.menu.removed, [oldItem])
+			self.assertFalse(oldMenu.destroyed)
+			self.assertIsNot(plugin.submenu_vocalizer, oldMenu)
+			self.assertIsNotNone(plugin.menuItem)
 		finally:
 			for name in moduleNames:
 				oldModule = previousModules[name]
@@ -163,10 +155,10 @@ class LicenseImportFlowTests(unittest.TestCase):
 					sys.modules.pop(name, None)
 				else:
 					sys.modules[name] = oldModule
-			if previousBuiltinTranslation is None:
+			if previousTranslation is None:
 				builtins.__dict__.pop("_", None)
 			else:
-				builtins._ = previousBuiltinTranslation
+				builtins._ = previousTranslation
 
 
 if __name__ == "__main__":
