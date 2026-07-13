@@ -42,7 +42,7 @@ Projekt nie jest powiązany z NV Access, Tiflotecnia, Nuance ani Cerence.
    katalogi zwykle zaczynają się od `vocalizer-voice-`.
 4. Uruchom NVDA i otwórz:
 
-   `Menu NVDA > Ustawienia > Vocalizer Automotive > Wprowadź licencję`
+   `Menu NVDA > Vocalizer Automotive > Wprowadź licencję`
 
    Licencja zostanie skopiowana do:
 

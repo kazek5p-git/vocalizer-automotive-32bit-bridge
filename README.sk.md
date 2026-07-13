@@ -42,7 +42,7 @@ Projekt nie je prepojený s NV Access, Tiflotecnia, Nuance ani Cerence.
    Ich priečinky sa zvyčajne začínajú na `vocalizer-voice-`.
 4. Spustite NVDA a otvorte:
 
-   `Ponuka NVDA > Nastavenia > Vocalizer Automotive > Zadať licenciu`
+   `Ponuka NVDA > Vocalizer Automotive > Zadať licenciu`
 
    Licencia sa skopíruje do:
 
