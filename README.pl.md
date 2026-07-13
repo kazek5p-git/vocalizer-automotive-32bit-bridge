@@ -58,6 +58,11 @@ To wydanie używa usługi brokered audio NVDA, aby przekazywać dźwięk mowy pr
 główny proces NVDA. Wymaga to NVDA 2026.2 lub nowszego. Sonic Pitch pozostaje
 zgodny z tą ścieżką audio.
 
+Ten wariant obsługuje natywne przyciszanie dźwięku NVDA. Skrót
+`Shift+NVDA+D` przełącza tryby przyciszania audio dostępne w NVDA. Wybrany tryb
+jest zarządzany i zapisywany przez NVDA. Klasyczny wariant `v2.1.7` nie korzysta
+z tej ścieżki brokered audio.
+
 ## Warianty wydań
 
 - `v2.1.7`: klasyczny bridge dla NVDA 2026.1 i nowszych.

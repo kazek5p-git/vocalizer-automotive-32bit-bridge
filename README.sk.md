@@ -58,6 +58,11 @@ Toto vydanie používa službu brokered audio NVDA na odovzdanie zvuku reči cez
 hlavný proces NVDA. Vyžaduje NVDA 2026.2 alebo novší. Sonic Pitch zostáva
 kompatibilný s touto audio cestou.
 
+Tento variant podporuje natívne stlmenie zvuku NVDA. Skratka
+`Shift+NVDA+D` prepína režimy stlmenia zvuku dostupné v NVDA. Vybraný režim
+spravuje a ukladá samotné NVDA. Klasický variant `v2.1.7` túto cestu brokered
+audio nepoužíva.
+
 ## Varianty vydaní
 
 - `v2.1.7`: klasický most pre NVDA 2026.1 a novšie.

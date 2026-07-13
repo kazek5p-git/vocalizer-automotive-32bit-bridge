@@ -58,6 +58,11 @@ This release uses NVDA's brokered-audio service to route speech audio through
 the main NVDA process. This requires NVDA 2026.2 or newer. Sonic Pitch remains
 compatible with the brokered audio path.
 
+Native NVDA audio ducking is available in this variant. Press
+`Shift+NVDA+D` to cycle through NVDA's audio ducking modes. The selected mode
+is managed and saved by NVDA. The classic `v2.1.7` variant does not use this
+brokered-audio path.
+
 ## Release Variants
 
 - `v2.1.7`: classic bridge for NVDA 2026.1 and newer.
