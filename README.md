@@ -39,7 +39,7 @@ The project is not affiliated with NV Access, Tiflotecnia, Nuance, or Cerence.
    directories normally begin with `vocalizer-voice-`.
 4. Start NVDA and open:
 
-   `NVDA menu > Preferences > Vocalizer Automotive > Enter License`
+   `NVDA menu > Vocalizer Automotive > Enter License`
 
    The license is copied to:
 
