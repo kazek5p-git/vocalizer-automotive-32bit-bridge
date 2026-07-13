@@ -232,11 +232,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				_("Error"),
 				wx.OK | wx.ICON_ERROR,
 			)
-		finally:
-			# Rebuild after the menu event has finished; destroying the active
-			# submenu from inside its handler can terminate NVDA.
-			wx.CallAfter(self.createMenu)
-
 	def onVocalizerLicenseRemoveMenu(self, event):
 		if (
 			gui.messageBox(
@@ -249,14 +244,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			return
 		try:
 			os.remove(getDefaultLicensePath())
-			self.createMenu()
 			gui.messageBox(
 				_("License removed. Restart NVDA for the change to take effect."),
 				_("Vocalizer Automotive"),
 				wx.OK | wx.ICON_INFORMATION,
 			)
 		except FileNotFoundError:
-			self.createMenu()
+			pass
 		except (OSError, IOError) as error:
 			log.error("Error removing Vocalizer license.", exc_info=True)
 			gui.messageBox(
@@ -287,8 +281,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		)
 
 	def terminate(self):
-		try:
-			self.removeMenu()
-		except Exception:
-			log.debugWarning("Unable to remove Vocalizer Automotive menu.", exc_info=True)
+		# NVDA is tearing down the wx main frame here. Explicitly removing or
+		# destroying menus can interrupt shutdown and prevent a restart.
 		super(GlobalPlugin, self).terminate()
