@@ -80,10 +80,14 @@ msgid "License files (*.ini)|*.ini|All files (*.*)|*.*"
 msgstr ""
 
 msgid ""
-"License file copied successfully.\n"
-"Restart NVDA for the Automotive host to validate it.\n"
-"\n"
-"Restart NVDA now?"
+"License entered successfully!\n"
+"Restart NVDA manually for the Automotive host to validate it."
+msgstr ""
+
+msgid "The license file was copied, but its data could not be read."
+msgstr ""
+
+msgid "Success!"
 msgstr ""
 
 msgid "Error copying license data: {error}"
