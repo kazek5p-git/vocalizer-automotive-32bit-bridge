@@ -55,6 +55,15 @@ This release uses the classic NVDA bridge for compatibility with NVDA 2026.1
 and newer. Sonic Pitch remains independent and uses its own WavePlayer hook;
 it does not require the optional brokered-audio proxy.
 
+## Release Variants
+
+- `v2.1.9`: classic bridge for NVDA 2026.1 and newer.
+- `v2.2.0`: brokered-audio bridge for NVDA 2026.2 and newer.
+
+Install only one variant of the add-on at a time. The brokered variant routes
+speech audio through NVDA's main audio service; the classic variant is the
+compatible choice for NVDA 2026.1.
+
 ## Automatic Language Switching
 
 The menu contains **Automatic Language Switching Settings**. The dialog

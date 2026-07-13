@@ -55,6 +55,15 @@ To wydanie używa klasycznego mostu NVDA, aby zachować zgodność z NVDA 2026.1
 i nowszymi. Sonic Pitch działa niezależnie przez własny hook WavePlayer i nie
 wymaga dodatkowego proxy audio.
 
+## Warianty wydań
+
+- `v2.1.9`: klasyczny bridge dla NVDA 2026.1 i nowszych.
+- `v2.2.0`: bridge brokered audio dla NVDA 2026.2 i nowszych.
+
+Instaluj tylko jeden wariant dodatku naraz. Wariant brokered przekazuje dźwięk
+mowy przez główną usługę audio NVDA; wariant klasyczny jest właściwym wyborem
+dla NVDA 2026.1.
+
 ## Automatyczne przełączanie języka
 
 W menu znajduje się pozycja **Ustawienia automatycznego przełączania języka**.
