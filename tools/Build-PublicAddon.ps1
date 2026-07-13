@@ -25,7 +25,7 @@ try {
     Get-ChildItem -LiteralPath $repositoryRoot -Recurse -File -Force | ForEach-Object {
         $relative = $_.FullName.Substring($repositoryRoot.Length + 1)
         $parts = $relative -split "\\"
-        if ($parts | Where-Object { $_ -in @(".git", "dist", "tools", "__pycache__") }) {
+        if ($parts | Where-Object { $_ -in @(".git", "dist", "tools", "tests", "__pycache__") }) {
             return
         }
         if ($_.Extension -in @(".dll", ".dllz", ".dat", ".dcb", ".rules", ".hdr", ".pyc", ".pyo")) {

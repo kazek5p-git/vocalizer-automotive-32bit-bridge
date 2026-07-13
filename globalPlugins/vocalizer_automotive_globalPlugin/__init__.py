@@ -101,8 +101,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
+		self.menu = None
 		self.submenu_vocalizer = None
 		self.menuItem = None
+		self._terminating = False
 		if globalVars.appArgs.secure:
 			return
 		try:
@@ -111,9 +113,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			log.error("Unable to create Vocalizer Automotive menu.", exc_info=True)
 
 	def createMenu(self):
-		self.removeMenu()
 		self.submenu_vocalizer = wx.Menu()
 		sysTrayIcon = gui.mainFrame.sysTrayIcon
+		self.menu = sysTrayIcon.menu
 
 		item = self.submenu_vocalizer.Append(
 			wx.ID_ANY,
@@ -152,34 +154,38 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		)
 		sysTrayIcon.Bind(wx.EVT_MENU, self.onAbout, item)
 
-		try:
-			self.menuItem = sysTrayIcon.preferencesMenu.AppendSubMenu(
-				self.submenu_vocalizer,
-				_("Vocalizer Automotive"),
-			)
-		except AttributeError:
-			self.menuItem = sysTrayIcon.menu.AppendSubMenu(
-				self.submenu_vocalizer,
-				_("Vocalizer Automotive"),
-			)
+		self.menuItem = self.menu.Insert(
+			2,
+			wx.ID_ANY,
+			_("Vocalizer Automotive"),
+			self.submenu_vocalizer,
+			_("Vocalizer Automotive management options"),
+		)
 
 	def removeMenu(self):
 		if self.menuItem is None:
 			return
 		try:
-			preferencesMenu = gui.mainFrame.sysTrayIcon.preferencesMenu
-			preferencesMenu.Remove(self.menuItem)
+			self.menu.Remove(self.menuItem)
 		except Exception:
-			try:
-				gui.mainFrame.sysTrayIcon.menu.Remove(self.menuItem)
-			except Exception:
-				pass
-		try:
-			self.submenu_vocalizer.Destroy()
-		except Exception:
-			pass
+			log.debugWarning(
+				"Unable to remove Vocalizer Automotive menu item.",
+				exc_info=True,
+			)
 		self.menuItem = None
+		self.menu = None
 		self.submenu_vocalizer = None
+
+	def reinitializeMenu(self):
+		if self._terminating:
+			return
+		try:
+			# Follow the current Tiflotecnia menu pattern: remove only the
+			# parent item. Destroying the active wx.Menu can terminate NVDA.
+			self.removeMenu()
+			self.createMenu()
+		except Exception:
+			log.error("Unable to reinitialize Vocalizer Automotive menu.", exc_info=True)
 
 	def onLanguageSettings(self, event):
 		if not getInstalledVoiceLocaleMap():
@@ -219,6 +225,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 					_("Success!"),
 					wx.OK | wx.ICON_INFORMATION,
 				)
+				wx.CallAfter(self.reinitializeMenu)
 			else:
 				gui.messageBox(
 					_("The license file was copied, but its data could not be read."),
@@ -249,6 +256,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				_("Vocalizer Automotive"),
 				wx.OK | wx.ICON_INFORMATION,
 			)
+			wx.CallAfter(self.reinitializeMenu)
 		except FileNotFoundError:
 			pass
 		except (OSError, IOError) as error:
@@ -283,4 +291,5 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def terminate(self):
 		# NVDA is tearing down the wx main frame here. Explicitly removing or
 		# destroying menus can interrupt shutdown and prevent a restart.
+		self._terminating = True
 		super(GlobalPlugin, self).terminate()
