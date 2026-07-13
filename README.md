@@ -9,7 +9,7 @@ The bridge runs the original 32-bit driver in NVDA's dedicated 32-bit
 synthesizer host using NVDA's standard compatibility bridge.
 
 This branch contains the brokered-audio variant and requires NVDA 2026.2 or
-newer. For NVDA 2026.1, use the `main` branch and release `v2.1.9`.
+newer. For NVDA 2026.1, use the `main` branch and release `v2.1.7`.
 
 ## Important
 
@@ -60,7 +60,7 @@ compatible with the brokered audio path.
 
 ## Release Variants
 
-- `v2.1.9`: classic bridge for NVDA 2026.1 and newer.
+- `v2.1.7`: classic bridge for NVDA 2026.1 and newer.
 - `v2.2.0`: brokered-audio bridge for NVDA 2026.2 and newer.
 
 Install only one variant of the add-on at a time. The brokered variant routes

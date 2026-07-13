@@ -9,7 +9,7 @@ Most spúšťa pôvodný 32-bitový ovládač vo vyhradenom hostiteľovi synteti
 NVDA pomocou štandardného mosta kompatibility NVDA.
 
 Táto vetva obsahuje variant brokered audio a vyžaduje NVDA 2026.2 alebo
-novší. Pre NVDA 2026.1 použite vetvu `main` a vydanie `v2.1.9`.
+novší. Pre NVDA 2026.1 použite vetvu `main` a vydanie `v2.1.7`.
 
 ## Dôležité
 
@@ -60,7 +60,7 @@ kompatibilný s touto audio cestou.
 
 ## Varianty vydaní
 
-- `v2.1.9`: klasický most pre NVDA 2026.1 a novšie.
+- `v2.1.7`: klasický most pre NVDA 2026.1 a novšie.
 - `v2.2.0`: most brokered audio pre NVDA 2026.2 a novšie.
 
 Inštalujte naraz iba jeden variant doplnku. Variant brokered odovzdáva zvuk

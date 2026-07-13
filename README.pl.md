@@ -9,7 +9,7 @@ Most uruchamia oryginalny sterownik 32-bitowy w dedykowanym hoście
 syntezatora NVDA za pomocą standardowego mostu zgodności NVDA.
 
 Ta gałąź zawiera wariant brokered audio i wymaga NVDA 2026.2 lub nowszego.
-Dla NVDA 2026.1 użyj gałęzi `main` i wydania `v2.1.9`.
+Dla NVDA 2026.1 użyj gałęzi `main` i wydania `v2.1.7`.
 
 ## Ważne
 
@@ -60,7 +60,7 @@ zgodny z tą ścieżką audio.
 
 ## Warianty wydań
 
-- `v2.1.9`: klasyczny bridge dla NVDA 2026.1 i nowszych.
+- `v2.1.7`: klasyczny bridge dla NVDA 2026.1 i nowszych.
 - `v2.2.0`: bridge brokered audio dla NVDA 2026.2 i nowszych.
 
 Instaluj tylko jeden wariant dodatku naraz. Wariant brokered przekazuje dźwięk
