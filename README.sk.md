@@ -57,7 +57,7 @@ a nepotrebuje ďalšie audio proxy.
 
 ## Varianty vydaní
 
-- `v2.1.9`: klasický most pre NVDA 2026.1 a novšie.
+- `v2.1.7`: klasický most pre NVDA 2026.1 a novšie.
 - `v2.2.0`: most brokered audio pre NVDA 2026.2 a novšie.
 
 Inštalujte naraz iba jeden variant doplnku. Variant brokered odovzdáva zvuk
