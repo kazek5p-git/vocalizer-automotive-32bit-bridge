@@ -58,6 +58,11 @@ Toto vydanie používa službu brokered audio NVDA na odovzdanie zvuku reči cez
 hlavný proces NVDA. Vyžaduje NVDA 2026.2 alebo novší. Sonic Pitch zostáva
 kompatibilný s touto audio cestou.
 
+Ak v nastaveniach zvuku NVDA zapnete režim stlmenia, most bude spravovať
+stlmenie počas reči Automotive. Ak NVDA oznámi, že stlmenie nie je dostupné,
+reč bude naďalej fungovať normálne a hlasitosť ostatných aplikácií sa
+nezmení.
+
 ## Varianty vydaní
 
 - `v2.1.7`: klasický most pre NVDA 2026.1 a novšie.

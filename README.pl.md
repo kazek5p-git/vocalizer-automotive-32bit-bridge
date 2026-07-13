@@ -58,6 +58,11 @@ To wydanie używa usługi brokered audio NVDA, aby przekazywać dźwięk mowy pr
 główny proces NVDA. Wymaga to NVDA 2026.2 lub nowszego. Sonic Pitch pozostaje
 zgodny z tą ścieżką audio.
 
+Po włączeniu trybu przyciszania dźwięku w ustawieniach dźwięku NVDA most
+zarządza przyciszaniem podczas mowy Automotive. Jeżeli NVDA zgłosi, że
+przyciszanie nie jest dostępne, mowa nadal działa normalnie, a głośność
+innych aplikacji nie jest zmieniana.
+
 ## Warianty wydań
 
 - `v2.1.7`: klasyczny bridge dla NVDA 2026.1 i nowszych.
