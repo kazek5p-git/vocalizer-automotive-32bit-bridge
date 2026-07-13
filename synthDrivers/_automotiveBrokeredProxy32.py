@@ -8,6 +8,7 @@ from _bridge.base import Connection
 from _bridge.clients.synthDriverHost32 import launcher
 from _bridge.clients.synthDriverHost32.synthDriver import SynthDriverProxy32
 from _bridge.components.proxies.synthDriver import SynthDriverProxy
+from logHandler import log
 
 
 def createBrokeredSynthDriver(name, synthDriversPath):
@@ -45,6 +46,14 @@ def createBrokeredSynthDriver(name, synthDriversPath):
 
 
 class BrokeredSynthDriverProxy32(SynthDriverProxy32):
+	def _releaseAudioDuckingSuspender(self):
+		"""Allow NVDA's brokered WavePlayer to manage native audio ducking."""
+		suspender = getattr(self, "_audioDuckingSuspender", None)
+		if suspender is None:
+			return
+		self._audioDuckingSuspender = None
+		log.debug("Released NVDA audio ducking suspender for brokered Automotive audio.")
+
 	def __init__(self):
 		conn, remoteDriver = createBrokeredSynthDriver(
 			self.synthDriver32Name,
@@ -52,6 +61,7 @@ class BrokeredSynthDriverProxy32(SynthDriverProxy32):
 		)
 		try:
 			SynthDriverProxy.__init__(self, remoteDriver)
+			self._releaseAudioDuckingSuspender()
 			self.holdConnection(conn)
 		except Exception:
 			conn.close()
