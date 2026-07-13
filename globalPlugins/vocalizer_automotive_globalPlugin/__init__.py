@@ -12,7 +12,6 @@ import webbrowser
 import configobj
 import wx
 import addonHandler
-import core
 import globalPluginHandler
 import globalVars
 import gui
@@ -211,25 +210,32 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		try:
 			if os.path.abspath(sourcePath) != os.path.abspath(licensePath):
 				shutil.copyfile(sourcePath, licensePath)
-			self.createMenu()
-			ret = gui.messageBox(
-				_(
-					"License file copied successfully.\n"
-					"Restart NVDA for the Automotive host to validate it.\n\n"
-					"Restart NVDA now?"
-				),
-				_("Vocalizer Automotive"),
-				wx.YES_NO | wx.ICON_INFORMATION,
-			)
-			if ret == wx.YES:
-				core.restart()
-		except (OSError, IOError) as error:
+			if getLicenseInfo().startswith("licensed:"):
+				gui.messageBox(
+					_(
+						"License entered successfully!\n"
+						"Restart NVDA manually for the Automotive host to validate it."
+					),
+					_("Success!"),
+					wx.OK | wx.ICON_INFORMATION,
+				)
+			else:
+				gui.messageBox(
+					_("The license file was copied, but its data could not be read."),
+					_("Error"),
+					wx.OK | wx.ICON_ERROR,
+				)
+		except Exception as error:
 			log.error("Error entering Vocalizer license.", exc_info=True)
 			gui.messageBox(
 				_("Error copying license data: {error}").format(error=error),
 				_("Error"),
 				wx.OK | wx.ICON_ERROR,
 			)
+		finally:
+			# Rebuild after the menu event has finished; destroying the active
+			# submenu from inside its handler can terminate NVDA.
+			wx.CallAfter(self.createMenu)
 
 	def onVocalizerLicenseRemoveMenu(self, event):
 		if (
