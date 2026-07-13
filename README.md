@@ -3,11 +3,10 @@
 [Polski](README.pl.md) | [Slovenčina](README.sk.md) | English
 
 This project adapts the legacy 32-bit Nuance Vocalizer Automotive 5.5 NVDA
-driver for current 64-bit NVDA releases.
+driver for 64-bit NVDA 2026.1 and newer.
 
 The bridge runs the original 32-bit driver in NVDA's dedicated 32-bit
-synthesizer host. Audio is brokered back to the main NVDA process, so audio
-processing add-ons can see the speech stream.
+synthesizer host using NVDA's standard compatibility bridge.
 
 ## Important
 
@@ -49,6 +48,12 @@ The project is not affiliated with NV Access, Tiflotecnia, Nuance, or Cerence.
 5. Restart NVDA and select:
 
    `vocalizerAutomotive32`
+
+## Audio Processing
+
+This release uses the classic NVDA bridge for compatibility with NVDA 2026.1
+and newer. Sonic Pitch remains independent and uses its own WavePlayer hook;
+it does not require the optional brokered-audio proxy.
 
 ## Automatic Language Switching
 

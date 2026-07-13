@@ -3,6 +3,10 @@
 This repository contains source code and an NVDA 64-bit bridge for a legacy
 32-bit Vocalizer Automotive driver.
 
+The original add-on author has granted permission to publish the modifications
+contained in this repository. This permission does not change the status of
+third-party Vocalizer runtime files.
+
 The following are deliberately excluded:
 
 - Nuance Vocalizer runtime libraries

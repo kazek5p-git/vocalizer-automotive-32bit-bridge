@@ -3,11 +3,10 @@
 import os
 
 import globalVars
+from _bridge.clients.synthDriverHost32.synthDriver import SynthDriverProxy32
 
-from ._automotiveBrokeredProxy32 import BrokeredSynthDriverProxy32
 
-
-class SynthDriver(BrokeredSynthDriverProxy32):
+class SynthDriver(SynthDriverProxy32):
 	name = "vocalizerAutomotive32"
 	description = "Nuance Vocalizer 5.5 Automotive (32-bit bridge)"
 	synthDriver32Path = os.path.join(

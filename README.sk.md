@@ -3,11 +3,10 @@
 [English](README.md) | [Polski](README.pl.md) | Slovenčina
 
 Projekt upravuje starší 32-bitový ovládač Nuance Vocalizer Automotive 5.5
-tak, aby fungoval v súčasných 64-bitových verziách NVDA.
+tak, aby fungoval v 64-bitových verziách NVDA od 2026.1 a novších.
 
 Most spúšťa pôvodný 32-bitový ovládač vo vyhradenom hostiteľovi syntetizátora
-NVDA. Zvuk sa odovzdáva späť do hlavného procesu NVDA, takže doplnky na
-spracovanie reči ho môžu prijímať.
+NVDA pomocou štandardného mosta kompatibility NVDA.
 
 ## Dôležité
 
@@ -49,6 +48,12 @@ Projekt nie je prepojený s NV Access, Tiflotecnia, Nuance ani Cerence.
 5. Reštartujte NVDA a vyberte syntetizátor:
 
    `vocalizerAutomotive32`
+
+## Spracovanie zvuku
+
+Toto vydanie používa klasický most NVDA, aby zostalo kompatibilné s NVDA 2026.1
+a novšími. Sonic Pitch funguje nezávisle pomocou vlastného hooku WavePlayer
+a nepotrebuje ďalšie audio proxy.
 
 ## Automatické prepínanie jazyka
 
