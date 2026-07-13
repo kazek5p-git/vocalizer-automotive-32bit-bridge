@@ -1,0 +1,21 @@
+.git/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Proprietary or license-controlled Vocalizer runtime files.
+*.dll
+*.dllz
+*.dat
+*.dcb
+*.rules
+*.hdr
+vocalizer_license.ini
+
+# Local build output and private packages.
+dist/
+*.nvda-addon
+
+# Local NVDA configuration and scratch files.
+nvda.ini
+*.log

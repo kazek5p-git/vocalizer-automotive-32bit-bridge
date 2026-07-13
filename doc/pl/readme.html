@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../style.css" media="screen">
+<title>Sterownik Vocalizer Automotive 5.5</title>
+</head>
+<body>
+<h1>Sterownik Vocalizer Automotive 5.5</h1>
+<p>Ten dodatek łączy starszy, 32-bitowy sterownik Nuance Vocalizer
+Automotive 5.5 ze współczesnymi 64-bitowymi wersjami NVDA.</p>
+
+<h2>Wymagania</h2>
+<p>Publiczny pakiet nie zawiera własnościowych bibliotek DLL, danych głosowych
+ani plików licencji. Musisz użyć własnej, legalnie uzyskanej kopii.</p>
+<ul>
+<li><code>vautov5.dll</code></li>
+<li><code>nuan_platform.dll</code></li>
+<li>Co najmniej jeden zgodny dodatek z głosem Vocalizer Automotive.</li>
+<li>Ważna licencja Vocalizer dla tego komputera.</li>
+</ul>
+
+<h2>Instalacja</h2>
+<ol>
+<li>Zainstaluj dodatek.</li>
+<li>Umieść biblioteki DLL w katalogu
+<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>Zainstaluj osobno dodatki z głosami.</li>
+<li>Użyj menu <strong>Menu NVDA &gt; Ustawienia &gt; Vocalizer Automotive</strong>,
+aby wprowadzić licencję i skonfigurować automatyczne przełączanie języka.</li>
+<li>Uruchom ponownie NVDA i wybierz <code>vocalizerAutomotive32</code>.</li>
+</ol>
+
+<h2>Automatyczne przełączanie języka</h2>
+<p>Okno ustawień wykrywa zainstalowane głosy na podstawie ich metadanych
+<code>.hdr</code> i zapisuje wybrane przypisania w pliku
+<code>%APPDATA%\nvda\vocalizer.ini</code>.</p>
+
+<h2>Tłumaczenia</h2>
+<p>Interfejs dodatku i dokumentacja są dostępne po angielsku, polsku
+i słowacku. NVDA używa języka wybranego w ustawieniach ogólnych.</p>
+</body>
+</html>

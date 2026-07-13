@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Vocalizer Automotive 32-bit Bridge\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-13 00:00+0000\n"
+"PO-Revision-Date: 2026-07-13 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Slovak\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Vocalizer Automotive"
+msgstr "Vocalizer Automotive"
+
+msgid "No license file found."
+msgstr "Nenašiel sa súbor s licenciou."
+
+msgid "The license file exists but could not be read."
+msgstr "Súbor s licenciou existuje, ale nedá sa prečítať."
+
+msgid "License file found, but detailed information is unavailable."
+msgstr "Súbor s licenciou sa našiel, ale podrobné informácie nie sú dostupné."
+
+msgid "User Name: "
+msgstr "Meno používateľa: "
+
+msgid "User Identification: "
+msgstr "Identifikácia používateľa: "
+
+msgid "License Number: "
+msgstr "Číslo licencie: "
+
+msgid "Distributor: "
+msgstr "Distribútor: "
+
+msgid "License validation is performed by the 32-bit Automotive host."
+msgstr "Overenie licencie vykonáva 32-bitový hostiteľ Automotive."
+
+msgid "Automatic &Language Switching Settings"
+msgstr "Nastavenia automatického prepínania &jazyka"
+
+msgid "Configure which voice is used for each language."
+msgstr "Nastavte hlas používaný pre jednotlivé jazyky."
+
+msgid "Remove License"
+msgstr "Odstrániť licenciu"
+
+msgid "Remove the Automotive license from this NVDA copy."
+msgstr "Odstráňte licenciu Automotive z tejto kópie NVDA."
+
+msgid "Enter License"
+msgstr "Zadať licenciu"
+
+msgid "Enter your Automotive license data for this computer."
+msgstr "Zadajte údaje licencie Automotive pre tento počítač."
+
+msgid "Download More Voices"
+msgstr "Stiahnuť ďalšie hlasy"
+
+msgid "Open the Vocalizer voices download page."
+msgstr "Otvorte stránku na stiahnutie hlasov Vocalizer."
+
+msgid "About Nuance Vocalizer for NVDA"
+msgstr "O programe Nuance Vocalizer pre NVDA"
+
+msgid "No Automotive voice resources were found."
+msgstr "Nenašli sa žiadne hlasové prostriedky Automotive."
+
+msgid "Choose your Vocalizer license file"
+msgstr "Vyberte súbor licencie Vocalizer"
+
+msgid "License files (*.ini)|*.ini|All files (*.*)|*.*"
+msgstr "Licenčné súbory (*.ini)|*.ini|Všetky súbory (*.*)|*.*"
+
+msgid ""
+"License file copied successfully.\n"
+"Restart NVDA for the Automotive host to validate it.\n"
+"\n"
+"Restart NVDA now?"
+msgstr ""
+"Súbor s licenciou bol úspešne skopírovaný.\n"
+"Reštartujte NVDA, aby mohol 32-bitový hostiteľ Automotive overiť licenciu.\n"
+"\n"
+"Reštartovať NVDA teraz?"
+
+msgid "Error copying license data: {error}"
+msgstr "Chyba pri kopírovaní údajov licencie: {error}"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Are you sure you want to remove your Automotive license?"
+msgstr "Naozaj chcete odstrániť licenciu Automotive?"
+
+msgid "Remove License?"
+msgstr "Odstrániť licenciu?"
+
+msgid "License removed. Restart NVDA for the change to take effect."
+msgstr "Licencia bola odstránená. Reštartujte NVDA, aby sa zmena prejavila."
+
+msgid "Error removing license: {error}"
+msgstr "Chyba pri odstraňovaní licencie: {error}"
+
+msgid ""
+"Nuance Vocalizer for NVDA\n"
+"\n"
+"Automotive synthesizer version: 5.5\n"
+"NVDA driver version: {driverVersion}\n"
+"\n"
+"{licenseInfo}\n"
+"\n"
+"The synthesizer runs in a dedicated 32-bit NVDA host so it can work with 64-bit NVDA."
+msgstr ""
+"Nuance Vocalizer pre NVDA\n"
+"\n"
+"Verzia syntetizátora Automotive: 5.5\n"
+"Verzia ovládača NVDA: {driverVersion}\n"
+"\n"
+"{licenseInfo}\n"
+"\n"
+"Syntetizátor beží vo vyhradenom 32-bitovom hostiteľovi NVDA, takže môže pracovať so 64-bitovým NVDA."
+
+msgid "Vocalizer Automatic Language Switching Settings"
+msgstr "Nastavenia automatického prepínania jazyka Vocalizer"
+
+msgid "Select a language, and then configure the voice to be used:"
+msgstr "Vyberte jazyk a potom nastavte používaný hlas:"
+
+msgid "Locale Name:"
+msgstr "Názov jazyka:"
+
+msgid "Voice Name:"
+msgstr "Názov hlasu:"

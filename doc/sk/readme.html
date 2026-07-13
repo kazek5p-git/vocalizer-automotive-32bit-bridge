@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../style.css" media="screen">
+<title>Ovládač Vocalizer Automotive 5.5</title>
+</head>
+<body>
+<h1>Ovládač Vocalizer Automotive 5.5</h1>
+<p>Tento doplnok spája starší 32-bitový ovládač Nuance Vocalizer Automotive
+5.5 so súčasnými 64-bitovými verziami NVDA.</p>
+
+<h2>Požiadavky</h2>
+<p>Verejný balík neobsahuje vlastnícke DLL knižnice, hlasové údaje ani
+licenčné súbory. Musíte použiť vlastnú legálne získanú kópiu.</p>
+<ul>
+<li><code>vautov5.dll</code></li>
+<li><code>nuan_platform.dll</code></li>
+<li>Najmenej jeden kompatibilný doplnok s hlasom Vocalizer Automotive.</li>
+<li>Platná licencia Vocalizer pre tento počítač.</li>
+</ul>
+
+<h2>Inštalácia</h2>
+<ol>
+<li>Nainštalujte doplnok.</li>
+<li>Vložte DLL knižnice do priečinka
+<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>Samostatne nainštalujte doplnky s hlasmi.</li>
+<li>V ponuke <strong>Ponuka NVDA &gt; Nastavenia &gt; Vocalizer Automotive</strong>
+zadajte licenciu a nastavte automatické prepínanie jazyka.</li>
+<li>Reštartujte NVDA a vyberte <code>vocalizerAutomotive32</code>.</li>
+</ol>
+
+<h2>Automatické prepínanie jazyka</h2>
+<p>Dialóg nastavení vyhľadá nainštalované hlasy podľa ich metadát
+<code>.hdr</code> a uloží vybrané priradenia do súboru
+<code>%APPDATA%\nvda\vocalizer.ini</code>.</p>
+
+<h2>Preklady</h2>
+<p>Rozhranie doplnku a dokumentácia sú dostupné v angličtine, poľštine
+a slovenčine. NVDA používa jazyk vybraný vo všeobecných nastaveniach.</p>
+</body>
+</html>

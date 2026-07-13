@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../style.css" media="screen">
+<title>Vocalizer Automotive 5.5 Driver</title>
+</head>
+<body>
+<h1>Vocalizer Automotive 5.5 Driver</h1>
+<p>This add-on bridges the legacy 32-bit Nuance Vocalizer Automotive 5.5
+driver to current 64-bit NVDA releases.</p>
+
+<h2>Requirements</h2>
+<p>The public package does not contain proprietary runtime DLLs, voice data or
+license files. You must provide your own legally obtained copy.</p>
+<ul>
+<li><code>vautov5.dll</code></li>
+<li><code>nuan_platform.dll</code></li>
+<li>At least one compatible Vocalizer Automotive voice add-on.</li>
+<li>A valid Vocalizer license for this computer.</li>
+</ul>
+
+<h2>Installation</h2>
+<ol>
+<li>Install the add-on.</li>
+<li>Place the runtime DLLs in
+<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>Install your voice add-ons separately.</li>
+<li>Use <strong>NVDA menu &gt; Preferences &gt; Vocalizer Automotive</strong>
+to enter the license and configure automatic language switching.</li>
+<li>Restart NVDA and select <code>vocalizerAutomotive32</code>.</li>
+</ol>
+
+<h2>Automatic language switching</h2>
+<p>The settings dialog detects installed voices from their <code>.hdr</code>
+metadata and stores the selected mapping in
+<code>%APPDATA%\nvda\vocalizer.ini</code>.</p>
+
+<h2>Translations</h2>
+<p>The add-on interface and documentation are available in English, Polish
+and Slovak. NVDA uses the language selected in its general settings.</p>
+</body>
+</html>
