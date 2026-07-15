@@ -12,13 +12,17 @@
 5.5 so 64-bitovými verziami NVDA od 2026.2 a novšími.</p>
 <p>Toto vydanie je variant brokered audio a vyžaduje NVDA 2026.2 alebo novší.
 Pre NVDA 2026.1 použite vydanie <code>v2.1.7</code>.</p>
+<p>Pôvodný projekt Vocalizer Automotive 5.5 je abandonware. Pôvodný autor
+doplnku nezodpovedá za tento fork, jeho úpravy ani podporu.</p>
 
 <h2>Požiadavky</h2>
-<p>Verejný balík neobsahuje vlastnícke DLL knižnice, hlasové údaje ani
-licenčné súbory. Musíte použiť vlastnú legálne získanú kópiu.</p>
+<p>Balík obsahuje runtime súbory potrebné 32-bitovým hostiteľom Automotive.
+Neobsahuje samostatné hlasové doplnky ani používateľský licenčný súbor.</p>
 <ul>
 <li><code>vautov5.dll</code></li>
 <li><code>nuan_platform.dll</code></li>
+<li><code>nuan_platform.dllz</code> a požadované údaje komponentov.</li>
+<li>Požadované súbory ladenia.</li>
 <li>Najmenej jeden kompatibilný doplnok s hlasom Vocalizer Automotive.</li>
 <li>Platná licencia Vocalizer pre tento počítač.</li>
 </ul>
@@ -26,13 +30,14 @@ licenčné súbory. Musíte použiť vlastnú legálne získanú kópiu.</p>
 <h2>Inštalácia</h2>
 <ol>
 <li>Nainštalujte doplnok.</li>
-<li>Vložte DLL knižnice do priečinka
-<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>Doplnok už obsahuje požadované runtime súbory Automotive.</li>
 <li>Samostatne nainštalujte doplnky s hlasmi.</li>
 <li>V ponuke <strong>Ponuka NVDA &gt; Vocalizer Automotive</strong>
 zadajte licenciu a nastavte automatické prepínanie jazyka.</li>
 <li>Reštartujte NVDA a vyberte <code>vocalizerAutomotive32</code>.</li>
 </ol>
+<p>Licenčný súbor nie je súčasťou balíka a musí sa importovať z vlastnej
+licencovanej kópie.</p>
 
 <h2>Spracovanie zvuku</h2>
 <p>Toto vydanie používa službu brokered audio NVDA na odovzdanie zvuku reči
