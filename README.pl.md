@@ -93,6 +93,11 @@ przechowywane w repozytorium. Skrypt zawsze pomija `vocalizer_license.ini`.
 Uniwersalny szablon tłumaczeń znajduje się w pliku
 `locale/vocalizer_automotive_driver.pot`.
 
+Interfejs dodatku zawiera lokalizacje: `an`, `ar`, `da`, `de`, `el`, `es`, `fi`,
+`fr`, `gl`, `hr`, `hu`, `it`, `ja`, `ko`, `nb_NO`, `ne`, `nl`, `pl`, `pt_BR`,
+`pt_PT`, `ru`, `sk`, `sl`, `tr` i `zh_CN`. Dokumentacja HTML jest dostępna po
+angielsku, polsku i słowacku.
+
 ## Licencja
 
 Kod sterownika NVDA i mostu jest udostępniany na licencji GPL-2.0, zgodnie
