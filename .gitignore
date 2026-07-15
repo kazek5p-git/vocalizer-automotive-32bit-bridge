@@ -3,13 +3,7 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Proprietary or license-controlled Vocalizer runtime files.
-*.dll
-*.dllz
-*.dat
-*.dcb
-*.rules
-*.hdr
+# User-specific Vocalizer license file.
 vocalizer_license.ini
 
 # Local build output and private packages.

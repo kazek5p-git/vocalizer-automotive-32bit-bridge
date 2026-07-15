@@ -10,13 +10,19 @@
 <h1>Sterownik Vocalizer Automotive 5.5</h1>
 <p>Ten dodatek łączy starszy, 32-bitowy sterownik Nuance Vocalizer
 Automotive 5.5 z 64-bitowymi wersjami NVDA od 2026.1 wzwyż.</p>
+<p>Oryginalny projekt Vocalizer Automotive 5.5 jest abandonware. Autor
+oryginalnego dodatku nie ponosi odpowiedzialności za ten fork, jego modyfikacje
+ani pomoc techniczną.</p>
 
 <h2>Wymagania</h2>
-<p>Publiczny pakiet nie zawiera własnościowych bibliotek DLL, danych głosowych
-ani plików licencji. Musisz użyć własnej, legalnie uzyskanej kopii.</p>
+<p>Pakiet zawiera pliki runtime wymagane przez 32-bitowy host Automotive. Nie
+zawiera osobnych dodatków z głosami ani przypisanego do użytkownika pliku
+licencji.</p>
 <ul>
 <li><code>vautov5.dll</code></li>
 <li><code>nuan_platform.dll</code></li>
+<li><code>nuan_platform.dllz</code> i wymagane dane komponentów.</li>
+<li>Wymagane pliki strojenia.</li>
 <li>Co najmniej jeden zgodny dodatek z głosem Vocalizer Automotive.</li>
 <li>Ważna licencja Vocalizer dla tego komputera.</li>
 </ul>
@@ -24,13 +30,14 @@ ani plików licencji. Musisz użyć własnej, legalnie uzyskanej kopii.</p>
 <h2>Instalacja</h2>
 <ol>
 <li>Zainstaluj dodatek.</li>
-<li>Umieść biblioteki DLL w katalogu
-<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>Dodatek zawiera już wymagane pliki runtime Automotive.</li>
 <li>Zainstaluj osobno dodatki z głosami.</li>
 <li>Użyj menu <strong>Menu NVDA &gt; Vocalizer Automotive</strong>,
 aby wprowadzić licencję i skonfigurować automatyczne przełączanie języka.</li>
 <li>Uruchom ponownie NVDA i wybierz <code>vocalizerAutomotive32</code>.</li>
 </ol>
+<p>Plik licencji nie jest dołączony do pakietu i trzeba go zaimportować
+z własnej licencjonowanej kopii.</p>
 
 <h2>Przetwarzanie dźwięku</h2>
 <p>To wydanie używa klasycznego mostu zgodności NVDA. Sonic Pitch działa

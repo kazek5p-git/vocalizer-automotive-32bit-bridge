@@ -10,13 +10,19 @@
 <h1>Vocalizer Automotive 5.5 Driver</h1>
 <p>This add-on bridges the legacy 32-bit Nuance Vocalizer Automotive 5.5
 driver to 64-bit NVDA 2026.1 and newer.</p>
+<p>The original Vocalizer Automotive 5.5 project is abandonware. The original
+add-on author is not responsible for this fork, its modifications or its
+support.</p>
 
 <h2>Requirements</h2>
-<p>The public package does not contain proprietary runtime DLLs, voice data or
-license files. You must provide your own legally obtained copy.</p>
+<p>The package includes the runtime components required by the 32-bit
+Automotive host. It does not include separate voice add-ons or the
+user-specific license file.</p>
 <ul>
 <li><code>vautov5.dll</code></li>
 <li><code>nuan_platform.dll</code></li>
+<li><code>nuan_platform.dllz</code> and the required component data.</li>
+<li>Required tuning files.</li>
 <li>At least one compatible Vocalizer Automotive voice add-on.</li>
 <li>A valid Vocalizer license for this computer.</li>
 </ul>
@@ -24,13 +30,14 @@ license files. You must provide your own legally obtained copy.</p>
 <h2>Installation</h2>
 <ol>
 <li>Install the add-on.</li>
-<li>Place the runtime DLLs in
-<code>%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components</code>.</li>
+<li>The add-on already contains the required Automotive runtime components.</li>
 <li>Install your voice add-ons separately.</li>
 <li>Use <strong>NVDA menu &gt; Vocalizer Automotive</strong>
 to enter the license and configure automatic language switching.</li>
 <li>Restart NVDA and select <code>vocalizerAutomotive32</code>.</li>
 </ol>
+<p>The license file is not included in the package and must be imported from
+your own licensed copy.</p>
 
 <h2>Audio processing</h2>
 <p>This release uses the classic NVDA compatibility bridge. Sonic Pitch remains

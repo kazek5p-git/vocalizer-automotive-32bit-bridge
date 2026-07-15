@@ -10,31 +10,27 @@ synthesizer host using NVDA's standard compatibility bridge.
 
 ## Important
 
-This repository intentionally does **not** contain:
+The package includes the bridge code and the Vocalizer runtime components
+required by the 32-bit Automotive host:
 
 - `vautov5.dll`
 - `nuan_platform.dll`
-- Vocalizer voice data
-- Vocalizer license files
+- `nuan_platform.dllz`
+- the required component data and tuning files
 
-Those files are proprietary or license-controlled. You must obtain and use
-your own legally licensed copy. Do not upload them to this repository.
+The package does **not** include separate Vocalizer voice add-ons or the
+user-specific `vocalizer_license.ini` file. A valid license is still required
+by the runtime and must be imported separately.
 
-The project is not affiliated with NV Access, Tiflotecnia, Nuance, or Cerence.
+This fork is maintained independently. The original Vocalizer Automotive 5.5
+project is abandonware, and its original add-on author is not responsible for
+this fork, its modifications or its support.
 
 ## Installation
 
 1. Install the public `.nvda-addon` file from the GitHub Releases page, or
    copy this repository into the NVDA add-ons directory.
-2. Place your own runtime DLLs in:
-
-   `%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components`
-
-   Required files:
-
-   - `vautov5.dll`
-   - `nuan_platform.dll`
-
+2. The package already contains the required Automotive runtime components.
 3. Install your own Vocalizer Automotive voice add-ons separately. Their
    directories normally begin with `vocalizer-voice-`.
 4. Start NVDA and open:
@@ -86,22 +82,23 @@ Run:
 .\tools\Check-VocalizerAutomotiveRuntime.ps1
 ```
 
-The script reports missing runtime DLLs and detected voice add-ons. It does
-not download or include proprietary files.
+The script reports required runtime files, detected voice add-ons and the
+separate license file. It does not download or include a license.
 
 ## Building
 
-To build a public add-on package without runtime files:
+To build the complete add-on package:
 
 ```powershell
 .\tools\Build-PublicAddon.ps1
 ```
 
-The package is written to `dist`.
+The package is written to `dist` and includes the runtime files stored in the
+repository. The build always excludes `vocalizer_license.ini`.
 
 ## License
 
 The NVDA driver and bridge source is distributed under GPL-2.0 as described
-in [LICENSE](LICENSE) and [gpl.txt](gpl.txt). This license does not grant
-rights to redistribute third-party Vocalizer binaries, voice data, or
-license files.
+in [LICENSE](LICENSE) and [gpl.txt](gpl.txt). The included runtime components
+are separate runtime files included with this fork. Voice add-ons and
+user-specific license files are not included.

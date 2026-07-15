@@ -10,31 +10,27 @@ syntezatora NVDA za pomocą standardowego mostu zgodności NVDA.
 
 ## Ważne
 
-To repozytorium celowo nie zawiera:
+Pakiet zawiera kod mostu oraz pliki runtime wymagane przez 32-bitowy host
+Automotive:
 
 - `vautov5.dll`
 - `nuan_platform.dll`
-- danych głosowych Vocalizer
-- plików licencji Vocalizer
+- `nuan_platform.dllz`
+- wymagane dane komponentów i pliki strojenia
 
-Są to pliki własnościowe lub objęte licencją. Użyj własnej, legalnie nabytej
-kopii. Nie przesyłaj ich do tego repozytorium.
+Pakiet nie zawiera osobnych dodatków z głosami Vocalizer ani przypisanego do
+użytkownika pliku `vocalizer_license.ini`. Runtime nadal wymaga ważnej
+licencji, którą należy zaimportować osobno.
 
-Projekt nie jest powiązany z NV Access, Tiflotecnia, Nuance ani Cerence.
+Ten fork jest utrzymywany niezależnie. Oryginalny projekt Vocalizer Automotive
+5.5 jest abandonware, a autor oryginalnego dodatku nie ponosi odpowiedzialności
+za ten fork, jego modyfikacje ani pomoc techniczną.
 
 ## Instalacja
 
 1. Zainstaluj publiczny plik `.nvda-addon` z zakładki GitHub Releases albo
    skopiuj repozytorium do katalogu dodatków NVDA.
-2. Umieść własne biblioteki runtime w katalogu:
-
-   `%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components`
-
-   Wymagane pliki:
-
-   - `vautov5.dll`
-   - `nuan_platform.dll`
-
+2. Pakiet zawiera już wymagane pliki runtime Automotive.
 3. Zainstaluj osobno własne dodatki z głosami Vocalizer Automotive. Ich
    katalogi zwykle zaczynają się od `vocalizer-voice-`.
 4. Uruchom NVDA i otwórz:
@@ -80,18 +76,19 @@ Uruchom:
 .\tools\Check-VocalizerAutomotiveRuntime.ps1
 ```
 
-Skrypt pokazuje brakujące biblioteki runtime i wykryte dodatki głosowe. Nie
-pobiera ani nie dołącza plików własnościowych.
+Skrypt pokazuje wymagane pliki runtime, wykryte dodatki głosowe oraz osobny
+plik licencji. Nie pobiera ani nie dołącza licencji.
 
 ## Budowanie
 
-Aby zbudować publiczny dodatek bez plików runtime:
+Aby zbudować kompletny dodatek:
 
 ```powershell
 .\tools\Build-PublicAddon.ps1
 ```
 
-Pakiet zostanie zapisany w katalogu `dist`.
+Pakiet zostanie zapisany w katalogu `dist` i będzie zawierał pliki runtime
+przechowywane w repozytorium. Skrypt zawsze pomija `vocalizer_license.ini`.
 
 Uniwersalny szablon tłumaczeń znajduje się w pliku
 `locale/vocalizer_automotive_driver.pot`.
@@ -99,6 +96,6 @@ Uniwersalny szablon tłumaczeń znajduje się w pliku
 ## Licencja
 
 Kod sterownika NVDA i mostu jest udostępniany na licencji GPL-2.0, zgodnie
-z plikami [LICENSE](LICENSE) i [gpl.txt](gpl.txt). Licencja ta nie daje prawa
-do rozpowszechniania zewnętrznych bibliotek Vocalizer, danych głosowych ani
-plików licencji.
+z plikami [LICENSE](LICENSE) i [gpl.txt](gpl.txt). Dołączone pliki runtime są
+osobnymi plikami runtime dołączonymi do tego fork’a. Dodatki z głosami i
+przypisane do użytkownika pliki licencji nie są dołączane.

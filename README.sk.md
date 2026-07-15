@@ -10,31 +10,27 @@ NVDA pomocou štandardného mosta kompatibility NVDA.
 
 ## Dôležité
 
-Toto úložisko zámerne neobsahuje:
+Balík obsahuje kód mosta a runtime súbory potrebné 32-bitovým hostiteľom
+Automotive:
 
 - `vautov5.dll`
 - `nuan_platform.dll`
-- hlasové údaje Vocalizer
-- licenčné súbory Vocalizer
+- `nuan_platform.dllz`
+- požadované údaje komponentov a súbory ladenia
 
-Ide o vlastnícke súbory alebo súbory chránené licenciou. Použite vlastnú
-legálne získanú kópiu. Nenahrávajte ich do tohto úložiska.
+Balík neobsahuje samostatné hlasové doplnky Vocalizer ani používateľský súbor
+`vocalizer_license.ini`. Runtime stále vyžaduje platnú licenciu, ktorú treba
+importovať samostatne.
 
-Projekt nie je prepojený s NV Access, Tiflotecnia, Nuance ani Cerence.
+Tento fork je udržiavaný nezávisle. Pôvodný projekt Vocalizer Automotive 5.5
+je abandonware a pôvodný autor doplnku nezodpovedá za tento fork, jeho úpravy
+ani podporu.
 
 ## Inštalácia
 
 1. Nainštalujte verejný súbor `.nvda-addon` zo stránky GitHub Releases alebo
    skopírujte toto úložisko do priečinka doplnkov NVDA.
-2. Vložte vlastné runtime knižnice do priečinka:
-
-   `%APPDATA%\nvda\addons\vocalizer_automotive_driver\synthDrivers\vocalizerAutomotive\common\speech\components`
-
-   Požadované súbory:
-
-   - `vautov5.dll`
-   - `nuan_platform.dll`
-
+2. Balík už obsahuje požadované runtime súbory Automotive.
 3. Samostatne nainštalujte vlastné doplnky s hlasmi Vocalizer Automotive.
    Ich priečinky sa zvyčajne začínajú na `vocalizer-voice-`.
 4. Spustite NVDA a otvorte:
@@ -80,18 +76,19 @@ Spustite:
 .\tools\Check-VocalizerAutomotiveRuntime.ps1
 ```
 
-Skript zobrazí chýbajúce runtime knižnice a nájdené hlasové doplnky. Nesťahuje
-ani nepridáva vlastnícke súbory.
+Skript zobrazí požadované runtime súbory, nájdené hlasové doplnky a samostatný
+licenčný súbor. Nesťahuje ani nepridáva licenciu.
 
 ## Zostavenie
 
-Ak chcete vytvoriť verejný doplnok bez runtime súborov:
+Ak chcete vytvoriť kompletný doplnok:
 
 ```powershell
 .\tools\Build-PublicAddon.ps1
 ```
 
-Balík sa uloží do priečinka `dist`.
+Balík sa uloží do priečinka `dist` a bude obsahovať runtime súbory uložené
+v úložisku. Skript vždy vynechá `vocalizer_license.ini`.
 
 Univerzálna šablóna prekladov sa nachádza v súbore
 `locale/vocalizer_automotive_driver.pot`.
@@ -99,6 +96,6 @@ Univerzálna šablóna prekladov sa nachádza v súbore
 ## Licencia
 
 Zdrojový kód ovládača NVDA a mosta je distribuovaný pod licenciou GPL-2.0
-podľa súborov [LICENSE](LICENSE) a [gpl.txt](gpl.txt). Táto licencia
-neudeľuje právo na redistribúciu externých binárnych súborov Vocalizer,
-hlasových údajov ani licenčných súborov.
+podľa súborov [LICENSE](LICENSE) a [gpl.txt](gpl.txt). Priložené runtime
+súbory sú samostatné runtime súbory priložené k tomuto forku. Hlasové doplnky
+a používateľské licenčné súbory nie sú súčasťou balíka.
