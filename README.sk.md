@@ -102,6 +102,11 @@ v úložisku. Skript vždy vynechá `vocalizer_license.ini`.
 Univerzálna šablóna prekladov sa nachádza v súbore
 `locale/vocalizer_automotive_driver.pot`.
 
+Rozhranie doplnku obsahuje lokalizácie: `an`, `ar`, `da`, `de`, `el`, `es`,
+`fi`, `fr`, `gl`, `hr`, `hu`, `it`, `ja`, `ko`, `nb_NO`, `ne`, `nl`, `pl`,
+`pt_BR`, `pt_PT`, `ru`, `sk`, `sl`, `tr` a `zh_CN`. HTML dokumentácia je
+dostupná v angličtine, poľštine a slovenčine.
+
 ## Licencia
 
 Zdrojový kód ovládača NVDA a mosta je distribuovaný pod licenciou GPL-2.0

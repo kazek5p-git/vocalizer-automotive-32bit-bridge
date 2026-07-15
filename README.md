@@ -77,8 +77,11 @@ stores the selected voice mapping in:
 
 `%APPDATA%\nvda\vocalizer.ini`
 
-The add-on interface and documentation are available in English, Polish and
-Slovak. NVDA uses the language selected in its general settings.
+The add-on interface includes the original translations for these locales:
+`an`, `ar`, `da`, `de`, `el`, `es`, `fi`, `fr`, `gl`, `hr`, `hu`, `it`, `ja`,
+`ko`, `nb_NO`, `ne`, `nl`, `pl`, `pt_BR`, `pt_PT`, `ru`, `sk`, `sl`, `tr` and
+`zh_CN`. HTML documentation is available in English, Polish and Slovak.
+NVDA uses the language selected in its general settings.
 
 The reusable translation template is available at
 `locale/vocalizer_automotive_driver.pot`.

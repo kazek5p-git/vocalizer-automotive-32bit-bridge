@@ -28,3 +28,7 @@ example `pl` for Polish or `sk` for Slovak.
 Keep placeholders such as `{error}`, `{driverVersion}` and `{licenseInfo}`
 unchanged in translated messages. Keep the `&` marker in menu labels when
 the translated label should have a keyboard accelerator.
+
+The additional legacy Vocalizer locales were synchronized against the current
+bridge POT file. Messages that did not exist in the original translation use
+the English source text as NVDA's fallback.

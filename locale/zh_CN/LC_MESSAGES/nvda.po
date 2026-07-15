@@ -1,0 +1,131 @@
+# Updated from the original Vocalizer Automotive translation for the current bridge.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: Vocalizer Automotive 32-bit Bridge\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-13 00:00+0000\n"
+"PO-Revision-Date: 2026-07-15 00:00+0000\n"
+"Last-Translator: Original Vocalizer translation\n"
+"Language-Team: zh_CN\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Vocalizer Automotive"
+msgstr ""
+
+msgid "No license file found."
+msgstr "没有授权"
+
+msgid "The license file exists but could not be read."
+msgstr ""
+
+msgid "License file found, but detailed information is unavailable."
+msgstr "授权数据不可用"
+
+msgid "User Name: "
+msgstr "用户名："
+
+msgid "User Identification: "
+msgstr "用户身份证明： "
+
+msgid "License Number: "
+msgstr "授权码："
+
+msgid "Distributor: "
+msgstr "经销商："
+
+msgid "License validation is performed by the 32-bit Automotive host."
+msgstr ""
+
+msgid "Automatic &Language Switching Settings"
+msgstr "自动语言切换设置"
+
+msgid "Configure which voice is used for each language."
+msgstr "配置特定语言使用的对应合成器"
+
+msgid "Remove License"
+msgstr "删除授权"
+
+msgid "Remove the Automotive license from this NVDA copy."
+msgstr "从此 NVDA 副本中删除您的授权"
+
+msgid "Enter License"
+msgstr "输入授权"
+
+msgid "Enter your Automotive license data for this computer."
+msgstr "未此电脑键入授权数据"
+
+msgid "Download More Voices"
+msgstr "下载更多语音"
+
+msgid "Open the Vocalizer voices download page."
+msgstr "打开 vocalizer voices下载页面。"
+
+msgid "About Nuance Vocalizer for NVDA"
+msgstr "关于 NVDA 的  Nuance Vocalizer。"
+
+msgid "No Automotive voice resources were found."
+msgstr "没有安装任何语音"
+
+msgid "Choose your Vocalizer license file"
+msgstr ""
+
+msgid "License files (*.ini)|*.ini|All files (*.*)|*.*"
+msgstr ""
+
+msgid ""
+"License entered successfully!\n"
+"Restart NVDA manually for the Automotive host to validate it."
+msgstr ""
+
+msgid "The license file was copied, but its data could not be read."
+msgstr ""
+
+msgid "Success!"
+msgstr "成功！"
+
+msgid "Error copying license data: {error}"
+msgstr "复制授权数据时发生错误： {error}"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Are you sure you want to remove your Automotive license?"
+msgstr ""
+"您确定要删除您的授权吗？\n"
+"此操作无法恢复。"
+
+msgid "Remove License?"
+msgstr "删除授权？"
+
+msgid "License removed. Restart NVDA for the change to take effect."
+msgstr "授权删除成功，重新启动 NVDA 使更改生效。"
+
+msgid "Error removing license: {error}"
+msgstr "删除授权时发生错误： {error}"
+
+msgid ""
+"Nuance Vocalizer for NVDA\n"
+"\n"
+"Automotive synthesizer version: 5.5\n"
+"NVDA driver version: {driverVersion}\n"
+"\n"
+"{licenseInfo}\n"
+"\n"
+"The synthesizer runs in a dedicated 32-bit NVDA host so it can work with 64-bit NVDA."
+msgstr ""
+
+msgid "Vocalizer Automatic Language Switching Settings"
+msgstr "自动 Vocalizer 语言切换设置"
+
+msgid "Select a language, and then configure the voice to be used:"
+msgstr "选择一个地点，并为这个地点配置一个语音："
+
+msgid "Locale Name:"
+msgstr "地点名称："
+
+msgid "Voice Name:"
+msgstr "语音名称："

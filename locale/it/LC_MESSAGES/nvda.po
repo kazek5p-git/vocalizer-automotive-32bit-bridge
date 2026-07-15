@@ -1,0 +1,131 @@
+# Updated from the original Vocalizer Automotive translation for the current bridge.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: Vocalizer Automotive 32-bit Bridge\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-13 00:00+0000\n"
+"PO-Revision-Date: 2026-07-15 00:00+0000\n"
+"Last-Translator: Original Vocalizer translation\n"
+"Language-Team: it\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Vocalizer Automotive"
+msgstr ""
+
+msgid "No license file found."
+msgstr "Nessuna licenza."
+
+msgid "The license file exists but could not be read."
+msgstr ""
+
+msgid "License file found, but detailed information is unavailable."
+msgstr "Dati licenza non disponibili"
+
+msgid "User Name: "
+msgstr "Nome utente: "
+
+msgid "User Identification: "
+msgstr "Identificazione utente: "
+
+msgid "License Number: "
+msgstr "Numero licenza: "
+
+msgid "Distributor: "
+msgstr "Distributore: "
+
+msgid "License validation is performed by the 32-bit Automotive host."
+msgstr ""
+
+msgid "Automatic &Language Switching Settings"
+msgstr "Impostazioni di cambio &lingua automatico"
+
+msgid "Configure which voice is used for each language."
+msgstr "Configura quale voce debba essere usata per ciascuna lingua."
+
+msgid "Remove License"
+msgstr "Rimuovi licenza"
+
+msgid "Remove the Automotive license from this NVDA copy."
+msgstr "Rimuovi la tua licenza da questa copia di NVDA"
+
+msgid "Enter License"
+msgstr "Inserisci licenza"
+
+msgid "Enter your Automotive license data for this computer."
+msgstr "Inserire i dati della licenza per questo computer."
+
+msgid "Download More Voices"
+msgstr "Scarica voci aggiuntive"
+
+msgid "Open the Vocalizer voices download page."
+msgstr "Apri la pagina di download delle voci Vocalizer."
+
+msgid "About Nuance Vocalizer for NVDA"
+msgstr "Informazioni su Nuance Vocalizer per NVDA"
+
+msgid "No Automotive voice resources were found."
+msgstr "Nessuna voce installata."
+
+msgid "Choose your Vocalizer license file"
+msgstr ""
+
+msgid "License files (*.ini)|*.ini|All files (*.*)|*.*"
+msgstr ""
+
+msgid ""
+"License entered successfully!\n"
+"Restart NVDA manually for the Automotive host to validate it."
+msgstr ""
+
+msgid "The license file was copied, but its data could not be read."
+msgstr ""
+
+msgid "Success!"
+msgstr "Operazione eseguita!"
+
+msgid "Error copying license data: {error}"
+msgstr "Errore nella copia dei dati della licenza: {error}"
+
+msgid "Error"
+msgstr "Errore"
+
+msgid "Are you sure you want to remove your Automotive license?"
+msgstr ""
+"Sei sicuro di voler rimuovere la licenza?\n"
+"Questa operazione non può essere annullata."
+
+msgid "Remove License?"
+msgstr "Rimuovere la licenza?"
+
+msgid "License removed. Restart NVDA for the change to take effect."
+msgstr "Licenza rimossa con successo. Riavviare NVDA affinché i cambiamenti abbiano effetto."
+
+msgid "Error removing license: {error}"
+msgstr "Errore nel rimuovere la licenza: {error}"
+
+msgid ""
+"Nuance Vocalizer for NVDA\n"
+"\n"
+"Automotive synthesizer version: 5.5\n"
+"NVDA driver version: {driverVersion}\n"
+"\n"
+"{licenseInfo}\n"
+"\n"
+"The synthesizer runs in a dedicated 32-bit NVDA host so it can work with 64-bit NVDA."
+msgstr ""
+
+msgid "Vocalizer Automatic Language Switching Settings"
+msgstr "Impostazioni di cambio lingua automatico per Vocalizer"
+
+msgid "Select a language, and then configure the voice to be used:"
+msgstr "Seleziona il paese, poi configura la voce che hai deciso di usare:"
+
+msgid "Locale Name:"
+msgstr "Nome:"
+
+msgid "Voice Name:"
+msgstr "Nome Voce:"
