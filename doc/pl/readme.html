@@ -8,8 +8,11 @@
 </head>
 <body>
 <h1>Sterownik Vocalizer Automotive 5.5</h1>
-<p>Ten dodatek łączy starszy, 32-bitowy sterownik Nuance Vocalizer
-Automotive 5.5 z 64-bitowymi wersjami NVDA od 2026.1 wzwyż.</p>
+<p>Ten dodatek dostosowuje starszy, 32-bitowy sterownik Nuance Vocalizer
+Automotive 5.5 do 32- i 64-bitowych wersji NVDA.</p>
+<p>W 32-bitowym NVDA oryginalny sterownik Automotive jest ładowany
+bezpośrednio. W 64-bitowym NVDA most uruchamia go w dedykowanym 32-bitowym
+hoście syntezatora.</p>
 <p>Oryginalny projekt Vocalizer Automotive 5.5 jest abandonware. Autor
 oryginalnego dodatku nie ponosi odpowiedzialności za ten fork, jego modyfikacje
 ani pomoc techniczną.</p>
@@ -34,19 +37,26 @@ licencji.</p>
 <li>Zainstaluj osobno dodatki z głosami.</li>
 <li>Użyj menu <strong>Menu NVDA &gt; Vocalizer Automotive</strong>,
 aby wprowadzić licencję i skonfigurować automatyczne przełączanie języka.</li>
-<li>Uruchom ponownie NVDA i wybierz <code>vocalizerAutomotive32</code>.</li>
+<li>Uruchom ponownie NVDA i wybierz <code>vocalizerAutomotive</code> w
+32-bitowym NVDA albo <code>vocalizerAutomotive32</code> w 64-bitowym NVDA.</li>
 </ol>
 <p>Plik licencji nie jest dołączony do pakietu i trzeba go zaimportować
 z własnej licencjonowanej kopii.</p>
 
 <h2>Przetwarzanie dźwięku</h2>
-<p>To wydanie używa klasycznego mostu zgodności NVDA. Sonic Pitch działa
-niezależnie przez własny hook WavePlayer.</p>
+<p>To wydanie używa klasycznego mostu zgodności NVDA w 64-bitowym NVDA. W
+32-bitowym NVDA Automotive korzysta z natywnej ścieżki bezpośredniej. Sonic
+Pitch działa niezależnie przez własny hook WavePlayer.</p>
+<p>To wydanie nie korzysta ze ścieżki brokered audio NVDA. Użyj
+<code>v2.2.0</code> na 64-bitowym NVDA 2026.2 lub nowszym, jeśli potrzebujesz
+brokered audio i natywnego przyciszania dźwięku.</p>
 
 <h2>Warianty wydań</h2>
 <ul>
-<li><code>v2.1.7</code>: klasyczny bridge dla NVDA 2026.1 i nowszych.</li>
-<li><code>v2.2.0</code>: bridge brokered audio dla NVDA 2026.2 i nowszych.</li>
+<li><code>v2.1.7</code>: klasyczny bridge dla 32-bitowego NVDA oraz
+64-bitowego NVDA 2026.1 i nowszych.</li>
+<li><code>v2.2.0</code>: bridge brokered audio dla 64-bitowego NVDA 2026.2
+i nowszych, z bezpośrednią ścieżką dla 32-bitowego NVDA.</li>
 </ul>
 <p>Instaluj tylko jeden wariant naraz.</p>
 

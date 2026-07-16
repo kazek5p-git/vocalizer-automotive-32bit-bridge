@@ -8,8 +8,10 @@
 </head>
 <body>
 <h1>Vocalizer Automotive 5.5 Driver</h1>
-<p>This add-on bridges the legacy 32-bit Nuance Vocalizer Automotive 5.5
-driver to 64-bit NVDA 2026.1 and newer.</p>
+<p>This add-on adapts the legacy 32-bit Nuance Vocalizer Automotive 5.5
+driver for both 32-bit and 64-bit NVDA.</p>
+<p>On 32-bit NVDA, the original Automotive driver is loaded directly. On
+64-bit NVDA, the bridge runs it in NVDA's dedicated 32-bit synthesizer host.</p>
 <p>The original Vocalizer Automotive 5.5 project is abandonware. The original
 add-on author is not responsible for this fork, its modifications or its
 support.</p>
@@ -34,19 +36,26 @@ user-specific license file.</p>
 <li>Install your voice add-ons separately.</li>
 <li>Use <strong>NVDA menu &gt; Vocalizer Automotive</strong>
 to enter the license and configure automatic language switching.</li>
-<li>Restart NVDA and select <code>vocalizerAutomotive32</code>.</li>
+<li>Restart NVDA and select <code>vocalizerAutomotive</code> on 32-bit NVDA,
+or <code>vocalizerAutomotive32</code> on 64-bit NVDA.</li>
 </ol>
 <p>The license file is not included in the package and must be imported from
 your own licensed copy.</p>
 
 <h2>Audio processing</h2>
-<p>This release uses the classic NVDA compatibility bridge. Sonic Pitch remains
+<p>This release uses the classic NVDA compatibility bridge on 64-bit NVDA. On
+32-bit NVDA, Automotive uses its native direct path. Sonic Pitch remains
 independent and uses its own WavePlayer hook.</p>
+<p>This release does not use NVDA's brokered-audio path. Use
+<code>v2.2.0</code> on 64-bit NVDA 2026.2 or newer for brokered audio and
+native audio ducking.</p>
 
 <h2>Release variants</h2>
 <ul>
-<li><code>v2.1.7</code>: classic bridge for NVDA 2026.1 and newer.</li>
-<li><code>v2.2.0</code>: brokered-audio bridge for NVDA 2026.2 and newer.</li>
+<li><code>v2.1.7</code>: classic bridge for 32-bit NVDA and 64-bit NVDA
+2026.1 and newer.</li>
+<li><code>v2.2.0</code>: brokered-audio bridge for 64-bit NVDA 2026.2 and
+newer, with a direct 32-bit NVDA path.</li>
 </ul>
 <p>Install only one variant at a time.</p>
 

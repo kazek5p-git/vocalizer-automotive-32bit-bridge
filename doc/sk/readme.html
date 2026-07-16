@@ -8,8 +8,10 @@
 </head>
 <body>
 <h1>Ovládač Vocalizer Automotive 5.5</h1>
-<p>Tento doplnok spája starší 32-bitový ovládač Nuance Vocalizer Automotive
-5.5 so 64-bitovými verziami NVDA od 2026.1 a novšími.</p>
+<p>Tento doplnok upravuje starší 32-bitový ovládač Nuance Vocalizer
+Automotive 5.5 pre 32-bitové aj 64-bitové verzie NVDA.</p>
+<p>V 32-bitovom NVDA sa pôvodný ovládač Automotive načíta priamo. V 64-bitovom
+NVDA ho most spúšťa vo vyhradenom 32-bitovom hostiteľovi syntetizátora.</p>
 <p>Pôvodný projekt Vocalizer Automotive 5.5 je abandonware. Pôvodný autor
 doplnku nezodpovedá za tento fork, jeho úpravy ani podporu.</p>
 
@@ -32,19 +34,26 @@ Neobsahuje samostatné hlasové doplnky ani používateľský licenčný súbor.
 <li>Samostatne nainštalujte doplnky s hlasmi.</li>
 <li>V ponuke <strong>Ponuka NVDA &gt; Vocalizer Automotive</strong>
 zadajte licenciu a nastavte automatické prepínanie jazyka.</li>
-<li>Reštartujte NVDA a vyberte <code>vocalizerAutomotive32</code>.</li>
+<li>Reštartujte NVDA a vyberte <code>vocalizerAutomotive</code> v 32-bitovom
+NVDA alebo <code>vocalizerAutomotive32</code> v 64-bitovom NVDA.</li>
 </ol>
 <p>Licenčný súbor nie je súčasťou balíka a musí sa importovať z vlastnej
 licencovanej kópie.</p>
 
 <h2>Spracovanie zvuku</h2>
-<p>Toto vydanie používa klasický most kompatibility NVDA. Sonic Pitch funguje
+<p>Toto vydanie používa klasický most kompatibility NVDA v 64-bitovom NVDA.
+V 32-bitovom NVDA Automotive používa natívnu priamu cestu. Sonic Pitch funguje
 nezávisle pomocou vlastného hooku WavePlayer.</p>
+<p>Toto vydanie nepoužíva cestu brokered audio NVDA. Ak potrebujete brokered
+audio a natívne stlmenie zvuku, použite <code>v2.2.0</code> v 64-bitovom NVDA
+2026.2 alebo novšom.</p>
 
 <h2>Varianty vydaní</h2>
 <ul>
-<li><code>v2.1.7</code>: klasický most pre NVDA 2026.1 a novšie.</li>
-<li><code>v2.2.0</code>: most brokered audio pre NVDA 2026.2 a novšie.</li>
+<li><code>v2.1.7</code>: klasický most pre 32-bitové NVDA a 64-bitové NVDA
+2026.1 a novšie.</li>
+<li><code>v2.2.0</code>: most brokered audio pre 64-bitové NVDA 2026.2 a
+novšie s priamou cestou pre 32-bitové NVDA.</li>
 </ul>
 <p>Inštalujte naraz iba jeden variant.</p>
 

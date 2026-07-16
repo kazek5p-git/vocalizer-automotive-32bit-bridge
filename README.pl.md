@@ -3,10 +3,11 @@
 [English](README.md) | Polski | [Slovenčina](README.sk.md)
 
 Projekt dostosowuje starszy, 32-bitowy sterownik Nuance Vocalizer Automotive
-5.5 do 64-bitowych wersji NVDA od 2026.1 wzwyż.
+5.5 do 32- i 64-bitowych wersji NVDA.
 
-Most uruchamia oryginalny sterownik 32-bitowy w dedykowanym hoście
-syntezatora NVDA za pomocą standardowego mostu zgodności NVDA.
+W 32-bitowym NVDA oryginalny sterownik Automotive jest ładowany bezpośrednio.
+W 64-bitowym NVDA most uruchamia go w dedykowanym 32-bitowym hoście
+syntezatora za pomocą standardowego mostu zgodności NVDA.
 
 ## Ważne
 
@@ -41,24 +42,29 @@ za ten fork, jego modyfikacje ani pomoc techniczną.
 
    `%APPDATA%\nvda\vocalizer_license.ini`
 
-5. Uruchom ponownie NVDA i wybierz syntezator:
+5. Uruchom ponownie NVDA i wybierz sterownik odpowiedni dla architektury NVDA:
 
-   `vocalizerAutomotive32`
+   - 32-bitowy NVDA: `vocalizerAutomotive`
+   - 64-bitowy NVDA: `vocalizerAutomotive32`
 
 ## Przetwarzanie dźwięku
 
-To wydanie używa klasycznego mostu NVDA, aby zachować zgodność z NVDA 2026.1
-i nowszymi. Sonic Pitch działa niezależnie przez własny hook WavePlayer i nie
-wymaga dodatkowego proxy audio.
+To wydanie używa klasycznego mostu zgodności NVDA w 64-bitowym NVDA. W
+32-bitowym NVDA Automotive korzysta z natywnej ścieżki bezpośredniej. Sonic
+Pitch działa niezależnie przez własny hook WavePlayer.
+
+To wydanie nie korzysta ze ścieżki brokered audio NVDA. Użyj `v2.2.0` na
+64-bitowym NVDA 2026.2 lub nowszym, jeśli potrzebujesz brokered audio i
+natywnego przyciszania dźwięku.
 
 ## Warianty wydań
 
-- `v2.1.7`: klasyczny bridge dla NVDA 2026.1 i nowszych.
-- `v2.2.0`: bridge brokered audio dla NVDA 2026.2 i nowszych.
+- `v2.1.7`: klasyczny bridge dla 32-bitowego NVDA oraz 64-bitowego NVDA
+  2026.1 i nowszych.
+- `v2.2.0`: bridge brokered audio dla 64-bitowego NVDA 2026.2 i nowszych,
+  z bezpośrednią ścieżką dla 32-bitowego NVDA.
 
-Instaluj tylko jeden wariant dodatku naraz. Wariant brokered przekazuje dźwięk
-mowy przez główną usługę audio NVDA; wariant klasyczny jest właściwym wyborem
-dla NVDA 2026.1.
+Instaluj tylko jeden wariant dodatku naraz.
 
 ## Automatyczne przełączanie języka
 

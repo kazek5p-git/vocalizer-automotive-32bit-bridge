@@ -3,10 +3,11 @@
 [Polski](README.pl.md) | [Slovenčina](README.sk.md) | English
 
 This project adapts the legacy 32-bit Nuance Vocalizer Automotive 5.5 NVDA
-driver for 64-bit NVDA 2026.1 and newer.
+driver for both 32-bit and 64-bit NVDA.
 
-The bridge runs the original 32-bit driver in NVDA's dedicated 32-bit
-synthesizer host using NVDA's standard compatibility bridge.
+On 32-bit NVDA, the original Automotive driver is loaded directly. On 64-bit
+NVDA, the bridge runs it in NVDA's dedicated 32-bit synthesizer host using
+NVDA's standard compatibility bridge.
 
 ## Important
 
@@ -41,24 +42,28 @@ this fork, its modifications or its support.
 
    `%APPDATA%\nvda\vocalizer_license.ini`
 
-5. Restart NVDA and select:
+5. Restart NVDA and select the driver matching your NVDA architecture:
 
-   `vocalizerAutomotive32`
+   - 32-bit NVDA: `vocalizerAutomotive`
+   - 64-bit NVDA: `vocalizerAutomotive32`
 
 ## Audio Processing
 
-This release uses the classic NVDA bridge for compatibility with NVDA 2026.1
-and newer. Sonic Pitch remains independent and uses its own WavePlayer hook;
-it does not require the optional brokered-audio proxy.
+This release uses the classic NVDA compatibility bridge on 64-bit NVDA. On
+32-bit NVDA, Automotive uses its native direct path. Sonic Pitch remains
+independent and uses its own WavePlayer hook.
+
+This release does not use NVDA's brokered-audio path. Use `v2.2.0` on
+64-bit NVDA 2026.2 or newer when brokered audio and native audio ducking are
+needed.
 
 ## Release Variants
 
-- `v2.1.7`: classic bridge for NVDA 2026.1 and newer.
-- `v2.2.0`: brokered-audio bridge for NVDA 2026.2 and newer.
+- `v2.1.7`: classic bridge for 32-bit NVDA and 64-bit NVDA 2026.1 and newer.
+- `v2.2.0`: brokered-audio bridge for 64-bit NVDA 2026.2 and newer, with a
+  direct 32-bit NVDA path.
 
-Install only one variant of the add-on at a time. The brokered variant routes
-speech audio through NVDA's main audio service; the classic variant is the
-compatible choice for NVDA 2026.1.
+Install only one variant of the add-on at a time.
 
 ## Automatic Language Switching
 
