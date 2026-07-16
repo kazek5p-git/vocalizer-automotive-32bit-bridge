@@ -3,13 +3,13 @@
 [Polski](README.pl.md) | [Slovenčina](README.sk.md) | English
 
 This project adapts the legacy 32-bit Nuance Vocalizer Automotive 5.5 NVDA
-driver for 64-bit NVDA 2026.2 and newer.
+driver for both 32-bit and 64-bit NVDA.
 
-The bridge runs the original 32-bit driver in NVDA's dedicated 32-bit
-synthesizer host using NVDA's standard compatibility bridge.
+On 32-bit NVDA, the original Automotive driver is loaded directly. On 64-bit
+NVDA, the bridge runs it in NVDA's dedicated 32-bit synthesizer host.
 
-This branch contains the brokered-audio variant and requires NVDA 2026.2 or
-newer. For NVDA 2026.1, use the `main` branch and release `v2.1.7`.
+On 64-bit NVDA 2026.2 and newer, this branch uses NVDA's brokered-audio path.
+For the classic 64-bit bridge, use release `v2.1.7`.
 
 ## Important
 
@@ -45,29 +45,30 @@ its original add-on author is not responsible for this fork or its support.
 
    `%APPDATA%\nvda\vocalizer_license.ini`
 
-5. Restart NVDA and select:
+5. Restart NVDA and select the driver matching your NVDA architecture:
 
-   `vocalizerAutomotive32`
+   - 32-bit NVDA: `vocalizerAutomotive`
+   - 64-bit NVDA: `vocalizerAutomotive32`
 
 ## Audio Processing
 
-This release uses NVDA's brokered-audio service to route speech audio through
-the main NVDA process. This requires NVDA 2026.2 or newer. Sonic Pitch remains
-compatible with the brokered audio path.
+On 64-bit NVDA 2026.2 and newer, this release uses NVDA's brokered-audio
+service to route speech audio through the main NVDA process. On 32-bit NVDA,
+the original Automotive driver uses its direct native path. Sonic Pitch
+remains compatible with the brokered audio path.
 
 Native NVDA audio ducking is available in this variant. Press
 `Shift+NVDA+D` to cycle through NVDA's audio ducking modes. The selected mode
-is managed and saved by NVDA. The classic `v2.1.7` variant does not use this
-brokered-audio path.
+is managed and saved by NVDA on the brokered 64-bit path. The classic
+`v2.1.7` variant does not use this brokered-audio path.
 
 ## Release Variants
 
-- `v2.1.7`: classic bridge for NVDA 2026.1 and newer.
-- `v2.2.0`: brokered-audio bridge for NVDA 2026.2 and newer.
+- `v2.1.7`: classic bridge for 32-bit NVDA and 64-bit NVDA 2026.1 and newer.
+- `v2.2.0`: brokered-audio bridge for 64-bit NVDA 2026.2 and newer, with a
+  direct 32-bit NVDA path.
 
-Install only one variant of the add-on at a time. The brokered variant routes
-speech audio through NVDA's main audio service; the classic variant is the
-compatible choice for NVDA 2026.1.
+Install only one variant of the add-on at a time.
 
 ## Automatic Language Switching
 

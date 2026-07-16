@@ -3,13 +3,14 @@
 [English](README.md) | Polski | [Slovenčina](README.sk.md)
 
 Projekt dostosowuje starszy, 32-bitowy sterownik Nuance Vocalizer Automotive
-5.5 do 64-bitowych wersji NVDA od 2026.2 wzwyż.
+5.5 do 32- i 64-bitowych wersji NVDA.
 
-Most uruchamia oryginalny sterownik 32-bitowy w dedykowanym hoście
-syntezatora NVDA za pomocą standardowego mostu zgodności NVDA.
+W 32-bitowym NVDA oryginalny sterownik Automotive jest ładowany bezpośrednio.
+W 64-bitowym NVDA most uruchamia go w dedykowanym 32-bitowym hoście
+syntezatora.
 
-Ta gałąź zawiera wariant brokered audio i wymaga NVDA 2026.2 lub nowszego.
-Dla NVDA 2026.1 użyj gałęzi `main` i wydania `v2.1.7`.
+W 64-bitowym NVDA 2026.2 i nowszych ta gałąź używa ścieżki brokered audio
+NVDA. Klasyczny bridge dla 64-bitowego NVDA znajduje się w wydaniu `v2.1.7`.
 
 ## Ważne
 
@@ -46,29 +47,31 @@ techniczną.
 
    `%APPDATA%\nvda\vocalizer_license.ini`
 
-5. Uruchom ponownie NVDA i wybierz syntezator:
+5. Uruchom ponownie NVDA i wybierz sterownik odpowiedni dla architektury NVDA:
 
-   `vocalizerAutomotive32`
+   - 32-bitowy NVDA: `vocalizerAutomotive`
+   - 64-bitowy NVDA: `vocalizerAutomotive32`
 
 ## Przetwarzanie dźwięku
 
-To wydanie używa usługi brokered audio NVDA, aby przekazywać dźwięk mowy przez
-główny proces NVDA. Wymaga to NVDA 2026.2 lub nowszego. Sonic Pitch pozostaje
-zgodny z tą ścieżką audio.
+W 64-bitowym NVDA 2026.2 i nowszych wydanie używa usługi brokered audio NVDA,
+aby przekazywać dźwięk mowy przez główny proces NVDA. W 32-bitowym NVDA
+oryginalny sterownik Automotive korzysta z natywnej ścieżki bezpośredniej.
+Sonic Pitch pozostaje zgodny ze ścieżką brokered audio.
 
 Ten wariant obsługuje natywne przyciszanie dźwięku NVDA. Skrót
 `Shift+NVDA+D` przełącza tryby przyciszania audio dostępne w NVDA. Wybrany tryb
-jest zarządzany i zapisywany przez NVDA. Klasyczny wariant `v2.1.7` nie korzysta
-z tej ścieżki brokered audio.
+jest zarządzany i zapisywany przez NVDA na brokered ścieżce 64-bitowej.
+Klasyczny wariant `v2.1.7` nie korzysta z tej ścieżki brokered audio.
 
 ## Warianty wydań
 
-- `v2.1.7`: klasyczny bridge dla NVDA 2026.1 i nowszych.
-- `v2.2.0`: bridge brokered audio dla NVDA 2026.2 i nowszych.
+- `v2.1.7`: klasyczny bridge dla 32-bitowego NVDA oraz 64-bitowego NVDA
+  2026.1 i nowszych.
+- `v2.2.0`: bridge brokered audio dla 64-bitowego NVDA 2026.2 i nowszych,
+  z bezpośrednią ścieżką dla 32-bitowego NVDA.
 
-Instaluj tylko jeden wariant dodatku naraz. Wariant brokered przekazuje dźwięk
-mowy przez główną usługę audio NVDA; wariant klasyczny jest właściwym wyborem
-dla NVDA 2026.1.
+Instaluj tylko jeden wariant dodatku naraz.
 
 ## Automatyczne przełączanie języka
 
