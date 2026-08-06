@@ -150,8 +150,12 @@ msgstr "Lisans Numarası: "
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"Lisans başarıyla girildi!\n"
+"Değişikliklerin etkili olması için NVDA yeniden başlatılmalı.\n"
+"NVDA'yı şimdi yeniden başlatmak ister misiniz?"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "Lisans bilgisi bulunamadı"

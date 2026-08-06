@@ -153,8 +153,12 @@ msgstr "인증키 번호: "
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"인증키가 등록되었습니다!\n"
+"설정을 적용하려면 NVDA를 재시작해야 합니다.\n"
+"지금 NVDA를 재시작하시겠습니까?"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "인증 데이타 없음"

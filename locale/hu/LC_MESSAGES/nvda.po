@@ -152,8 +152,12 @@ msgstr "Licensz kód: "
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"A licensz sikeresen megadva!\n"
+"A változások életbe léptetéséhez az NVDA újraindítása szükséges.\n"
+"Szeretné újraindítani az NVDA-t?"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "A licensz adatok nem érhetőek el"
