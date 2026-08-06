@@ -153,8 +153,12 @@ msgstr "授权码："
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"导入授权成功！\n"
+"要使所有更改生效， NVDA 必须重新启动。\n"
+"您想现在 重新启动 NVDA 吗？"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "授权数据不可用"

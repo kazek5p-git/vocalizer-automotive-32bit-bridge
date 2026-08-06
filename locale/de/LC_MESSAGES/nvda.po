@@ -154,8 +154,12 @@ msgstr "Lizenznummer: "
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"Die Lizenzdaten wurden erfolgreich eingetragen!\n"
+"Damit alle Änderungen wirksam werden, muss NVDA neu gestartet werden.\n"
+"Möchten Sie NVDA jetzt neu starten?"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "Keine Lizenzdaten verfügbar"

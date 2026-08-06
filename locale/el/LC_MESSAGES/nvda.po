@@ -153,8 +153,12 @@ msgstr "Αριθμός Άδειας:"
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"Η άδεια εισήχθηκε με επιτυχία!\n"
+"Για την ενεργοποίηση των αλλαγών πρέπει να επανεκκινήσετε το NVDA.\n"
+"Θέλετε να επανεκκινήσετε το NVDA τώρα;"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "Δεν είναι διαθέσιμα τα δεδομένα της άδειας"

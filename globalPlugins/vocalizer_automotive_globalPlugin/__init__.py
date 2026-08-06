@@ -12,6 +12,7 @@ import webbrowser
 import configobj
 import wx
 import addonHandler
+import core
 import globalPluginHandler
 import globalVars
 import gui
@@ -307,15 +308,21 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			if os.path.abspath(sourcePath) != os.path.abspath(licensePath):
 				shutil.copyfile(sourcePath, licensePath)
 			if getLicenseInfo().startswith("licensed:"):
-				gui.messageBox(
-					_(
-						"License entered successfully!\n"
-						"Restart NVDA manually for the Automotive host to validate it."
-					),
-					_("Success!"),
-					wx.OK | wx.ICON_INFORMATION,
+				restart = (
+					gui.messageBox(
+						_(
+							"License entered successfully!\n"
+							"For all changes to take effect NVDA must be restarted.\n"
+							"Do you want to restart NVDA now?"
+						),
+						_("Success!"),
+						wx.YES_NO,
+					)
+					== wx.YES
 				)
 				wx.CallAfter(self.reinitializeMenu)
+				if restart:
+					core.restart()
 			else:
 				gui.messageBox(
 					_("The license file was copied, but its data could not be read."),

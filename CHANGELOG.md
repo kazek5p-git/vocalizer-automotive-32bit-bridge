@@ -9,6 +9,7 @@ All notable changes to this project are documented in this file.
 * Restored the original Vocalizer Automotive menu wording, descriptions, license file chooser and About information where compatible with 64-bit NVDA and the 32-bit host.
 * Added a confirmation before importing a license, explaining that the Automotive engine validates it after restart and that detailed rejection information is not available through the current 64/32-bit bridge.
 * Restored the original translated license-removal confirmation and expanded the translation catalog without changing the existing automatic language-switching behavior.
+* Restored the original post-import restart prompt, allowing NVDA to restart immediately after a license file is copied successfully.
 * Changed the behavior of the **Download More Voices** menu item. It now opens the original download redirection used by the legacy Vocalizer Automotive add-on.
 * Improved driver version detection by reading the installed manifest when the add-on API is unavailable, with `unknown` as the final fallback instead of a historical hard-coded version.
 * Updated the public package builder to include only the active `nuan_platform.dll`, excluding backup files with suffixed names.
@@ -30,6 +31,7 @@ All notable changes to this project are documented in this file.
 * Restored the original Vocalizer Automotive menu wording, descriptions, license file chooser and About information where compatible with 64-bit NVDA and the 32-bit host.
 * Added a confirmation before importing a license, explaining that the Automotive engine validates it after restart and that detailed rejection information is not available through the current 64/32-bit bridge.
 * Restored the original translated license-removal confirmation and expanded the translation catalog without changing the existing automatic language-switching behavior.
+* Restored the original post-import restart prompt, allowing NVDA to restart immediately after a license file is copied successfully.
 * Changed the behavior of the **Download More Voices** menu item. It now opens the original download redirection used by the legacy Vocalizer Automotive add-on.
 * Improved driver version detection by reading the installed manifest when the add-on API is unavailable, with `unknown` as the final fallback instead of a historical hard-coded version.
 * Updated the public package builder to include only the active `nuan_platform.dll`, excluding backup files with suffixed names.

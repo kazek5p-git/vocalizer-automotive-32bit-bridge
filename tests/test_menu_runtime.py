@@ -46,6 +46,7 @@ class MenuRuntimeTests(unittest.TestCase):
 			f"{packageName}.dialogs",
 			"addonHandler",
 			"configobj",
+			"core",
 			"globalPluginHandler",
 			"globalVars",
 			"gui",
@@ -77,6 +78,9 @@ class MenuRuntimeTests(unittest.TestCase):
 
 		configobj = types.ModuleType("configobj")
 		configobj.ConfigObj = object
+
+		core = types.ModuleType("core")
+		core.restart = lambda: None
 
 		globalPluginHandler = types.ModuleType("globalPluginHandler")
 		globalPluginHandler.GlobalPlugin = BaseGlobalPlugin
@@ -123,6 +127,7 @@ class MenuRuntimeTests(unittest.TestCase):
 		sys.modules[f"{packageName}.dialogs"] = dialogs
 		sys.modules["addonHandler"] = addonHandler
 		sys.modules["configobj"] = configobj
+		sys.modules["core"] = core
 		sys.modules["globalPluginHandler"] = globalPluginHandler
 		sys.modules["globalVars"] = globalVars
 		sys.modules["gui"] = gui

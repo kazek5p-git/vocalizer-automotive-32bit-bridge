@@ -42,9 +42,9 @@ def _calls(node):
 
 
 class GlobalPluginLifecycleTests(unittest.TestCase):
-	def test_license_import_does_not_restart_or_destroy_menu(self):
+	def test_license_import_offers_restart_without_destroying_menu(self):
 		calls = _calls(_load_function("onVocalizerLicenseMenu"))
-		self.assertNotIn("core.restart", calls)
+		self.assertIn("core.restart", calls)
 		self.assertNotIn("self.createMenu", calls)
 		self.assertIn("wx.CallAfter", calls)
 

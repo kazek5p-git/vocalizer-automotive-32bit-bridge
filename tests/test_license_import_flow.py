@@ -24,6 +24,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 			f"{packageName}.dialogs",
 			"addonHandler",
 			"configobj",
+			"core",
 			"globalPluginHandler",
 			"globalVars",
 			"gui",
@@ -60,6 +61,9 @@ class LicenseImportFlowTests(unittest.TestCase):
 		configobj = types.ModuleType("configobj")
 		configobj.ConfigObj = object
 
+		core = types.ModuleType("core")
+		core.restart = mock.Mock()
+
 		globalPluginHandler = types.ModuleType("globalPluginHandler")
 		globalPluginHandler.GlobalPlugin = BaseGlobalPlugin
 
@@ -92,6 +96,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 		sys.modules[f"{packageName}.dialogs"] = dialogs
 		sys.modules["addonHandler"] = addonHandler
 		sys.modules["configobj"] = configobj
+		sys.modules["core"] = core
 		sys.modules["globalPluginHandler"] = globalPluginHandler
 		sys.modules["globalVars"] = globalVars
 		sys.modules["gui"] = gui
@@ -116,7 +121,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 			previousBuiltinTranslation,
 		)
 
-	def test_license_import_copies_file_without_menu_rebuild(self):
+	def test_license_import_copies_file_and_offers_restart(self):
 		(
 			module,
 			wx,
@@ -148,7 +153,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 						dialogState["destroyed"] = True
 
 				wx.FileDialog = FileDialog
-				gui.messageBox = mock.Mock(side_effect=[wx.YES, None])
+				gui.messageBox = mock.Mock(side_effect=[wx.YES, wx.NO])
 				wx.CallAfter = mock.Mock()
 
 				plugin = module.GlobalPlugin.__new__(module.GlobalPlugin)
@@ -169,6 +174,72 @@ class LicenseImportFlowTests(unittest.TestCase):
 						wx.YES_NO | wx.ICON_QUESTION,
 					),
 				)
+				self.assertEqual(
+					gui.messageBox.call_args_list[1].args,
+					(
+						"License entered successfully!\n"
+						"For all changes to take effect NVDA must be restarted.\n"
+						"Do you want to restart NVDA now?",
+						"Success!",
+						wx.YES_NO,
+					),
+				)
+				wx.CallAfter.assert_called_once_with(plugin.reinitializeMenu)
+				module.core.restart.assert_not_called()
+		finally:
+			for name in moduleNames:
+				oldModule = previousModules[name]
+				if oldModule is None:
+					sys.modules.pop(name, None)
+				else:
+					sys.modules[name] = oldModule
+			if previousBuiltinTranslation is None:
+				builtins.__dict__.pop("_", None)
+			else:
+				builtins._ = previousBuiltinTranslation
+
+	def test_accepting_success_dialog_restarts_nvda(self):
+		(
+			module,
+			wx,
+			gui,
+			previousModules,
+			moduleNames,
+			previousBuiltinTranslation,
+		) = self._load_plugin()
+		try:
+			with tempfile.TemporaryDirectory(
+				dir=SOURCE_PATH.parents[2] / "tests"
+			) as tempDir:
+				sourcePath = Path(tempDir) / "source.ini"
+				targetPath = Path(tempDir) / "vocalizer_license.ini"
+				sourcePath.write_text("[info]\nusername = Test\n", encoding="utf-8")
+
+				class FileDialog:
+					def __init__(self, *args, **kwargs):
+						return None
+
+					def ShowModal(self):
+						return wx.ID_OK
+
+					def GetPath(self):
+						return str(sourcePath)
+
+					def Destroy(self):
+						return None
+
+				wx.FileDialog = FileDialog
+				gui.messageBox = mock.Mock(side_effect=[wx.YES, wx.YES])
+				wx.CallAfter = mock.Mock()
+
+				plugin = module.GlobalPlugin.__new__(module.GlobalPlugin)
+				plugin.reinitializeMenu = mock.Mock()
+				module.getDefaultLicensePath = lambda: str(targetPath)
+				module.getLicenseInfo = lambda: f"licensed:{targetPath}"
+
+				plugin.onVocalizerLicenseMenu(object())
+
+				module.core.restart.assert_called_once_with()
 				wx.CallAfter.assert_called_once_with(plugin.reinitializeMenu)
 		finally:
 			for name in moduleNames:

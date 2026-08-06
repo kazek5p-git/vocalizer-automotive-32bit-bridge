@@ -154,8 +154,12 @@ msgstr "ライセンス番号: "
 
 msgid ""
 "License entered successfully!\n"
-"Restart NVDA manually for the Automotive host to validate it."
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
 msgstr ""
+"ライセンスが入力されました。\n"
+"有効にするためにNVDAを再起動してください。\n"
+"NVDAを再起動しますか？"
 
 msgid "License file found, but detailed information is unavailable."
 msgstr "ライセンスが有効ではありません"
