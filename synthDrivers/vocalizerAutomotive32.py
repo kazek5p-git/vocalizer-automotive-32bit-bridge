@@ -1,4 +1,7 @@
-# A 64-bit NVDA proxy for the original 32-bit Vocalizer Automotive driver.
+#A 64-bit NVDA proxy for the original 32-bit Vocalizer Automotive driver.
+#Copyright (C) 2026 DJ Graco and Kazek5p.
+#This file is covered by the GNU General Public License.
+#See the file GPL.txt for more details.
 
 import os
 
