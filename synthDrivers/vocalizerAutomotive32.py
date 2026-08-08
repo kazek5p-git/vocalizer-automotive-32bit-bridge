@@ -12,7 +12,7 @@ from ._automotiveBrokeredProxy32 import BrokeredSynthDriverProxy32
 
 class SynthDriver(BrokeredSynthDriverProxy32):
 	name = "vocalizerAutomotive32"
-	description = "Nuance Vocalizer 5.5 Automotive (32-bit brokered audio bridge)"
+	description = "Nuance Vocalizer 5.5"
 	synthDriver32Path = os.path.join(
 		globalVars.appArgs.configPath,
 		"addons",
