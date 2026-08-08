@@ -11,7 +11,7 @@ from _bridge.clients.synthDriverHost32.synthDriver import SynthDriverProxy32
 
 class SynthDriver(SynthDriverProxy32):
 	name = "vocalizerAutomotive32"
-	description = "Nuance Vocalizer 5.5 Automotive (32-bit bridge)"
+	description = "Nuance Vocalizer 5.5"
 	synthDriver32Path = os.path.join(
 		globalVars.appArgs.configPath,
 		"addons",
