@@ -1,13 +1,13 @@
 #Copyright (C) 2026 DJ Graco and Kazek5p.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
-#"""Run the legacy 32-bit driver through NVDA's main audio pipeline.
-#This bridge combines two lifecycle fixes:
-#* The synth bridge is closed by the standard ``Proxy.__del__`` lifecycle,
-  #after ``AudioPanel.onSave`` releases its reference to the previous synth.
-#* File-backed Windows RPyC pipe streams close their owning ``FileIO`` objects
-  #rather than closing the underlying Windows handles behind those objects.
-#"""
+"""Run the legacy 32-bit driver through NVDA's main audio pipeline.
+This bridge combines two lifecycle fixes:
+* The synth bridge is closed by the standard ``Proxy.__del__`` lifecycle,
+  after ``AudioPanel.onSave`` releases its reference to the previous synth.
+* File-backed Windows RPyC pipe streams close their owning ``FileIO`` objects
+  rather than closing the underlying Windows handles behind those objects.
+"""
 
 import subprocess
 
