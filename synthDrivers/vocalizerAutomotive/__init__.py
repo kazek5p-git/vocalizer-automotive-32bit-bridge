@@ -3,6 +3,7 @@
 #Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
 #Copyright (C) 2019 Leonard de Ruijter (Babbage B.V.) <leonard@babbage.com>
+#Copyright (C) 2026 DJ Graco and Kazek5p.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
