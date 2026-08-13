@@ -2,8 +2,8 @@
 #A part of the vocalizer driver for NVDA (Non Visual Desktop Access)
 #Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
-#Copyright (C) 2026 DJ Graco and Kazek5p.
-#Modified by DJ Graco and Kazek5p on 2026-08-03.
+#Copyright (C) 2026 DJ Graco.
+#Modified by DJ Graco on 2026-08-12.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
@@ -12,11 +12,7 @@ from ctypes import *
 import os.path
 import queue
 import threading
-try:
-	import addonHandler
-except ImportError:
-	# The NVDA 32-bit synth host does not ship addonHandler.
-	addonHandler = None
+import addonHandler
 import config
 import globalVars
 from logHandler import log
@@ -31,7 +27,7 @@ class BgThread(threading.Thread):
 
 	def __init__(self):
 		threading.Thread.__init__(self)
-		self.daemon = True
+		self.setDaemon(True)
 
 	def run(self):
 		global isSpeaking
@@ -134,35 +130,6 @@ bgQueue = None
 Player = None
 syncEvent = threading.Event()
 
-def _getConfigPath():
-	appArgs = getattr(globalVars, "appArgs", None)
-	configPath = getattr(appArgs, "configPath", None)
-	if configPath and os.path.isabs(configPath):
-		return configPath
-	return os.path.join(os.environ.get("APPDATA", ""), "nvda")
-
-def _getVoiceAddonPaths():
-	paths = []
-	if addonHandler is not None:
-		try:
-			for addon in addonHandler.getRunningAddons():
-				if addon.name.startswith("vocalizer-voice"):
-					paths.append(addon.path)
-		except Exception:
-			log.debugWarning("Unable to enumerate running Vocalizer voice add-ons.", exc_info=True)
-	if paths:
-		return paths
-	addonsDir = os.path.join(_getConfigPath(), "addons")
-	if not os.path.isdir(addonsDir):
-		return paths
-	for name in os.listdir(addonsDir):
-		if not name.startswith("vocalizer-voice"):
-			continue
-		path = os.path.join(addonsDir, name)
-		if os.path.isfile(os.path.join(path, "manifest.ini")):
-			paths.append(path)
-	return paths
-
 def preInitialize():
 	global vautoDll, platformDll, hSpeechClass, installResources
 	# Load dlls
@@ -171,18 +138,18 @@ def preInitialize():
 	platformDll = loadPlatformDll(os.path.join(_basePath, r"common\speech\components\nuan_platform.dll"))
 	# Provide external services to vocalizer
 	# Check addons for installed voices
-	voiceAddonPaths = _getVoiceAddonPaths()
+	voiceAddons = [addon for addon in addonHandler.getRunningAddons() if addon.name.startswith("vocalizer-voice")]
 	installResources = VAUTO_INSTALL()
 	installResources.fmtVersion = VAUTO_CURRENT_VERSION
 	installResources.pBinBrokerInfo = None
 	platformResources = VPLATFORM_RESOURCES()
 	platformResources.fmtVersion = VPLATFORM_CURRENT_VERSION
-	platformResources.u16NbrOfDataInstall = c_ushort(len(voiceAddonPaths) + 1)
-	platformResources.apDataInstall = (c_wchar_p * (len(voiceAddonPaths) + 1))()
-	platformResources.nvdaConfigDir = c_wchar_p(_getConfigPath())
+	platformResources.u16NbrOfDataInstall = c_ushort(len(voiceAddons) + 1)
+	platformResources.apDataInstall = (c_wchar_p * (len(voiceAddons) + 1))()
+	platformResources.nvdaConfigDir = c_wchar_p(globalVars.appArgs.configPath)
 	platformResources.apDataInstall[0] = c_wchar_p(_basePath)
-	for i, path in enumerate(voiceAddonPaths):
-		platformResources.apDataInstall[i+1] = c_wchar_p(path)
+	for i, addon in enumerate(voiceAddons):
+		platformResources.apDataInstall[i+1] = c_wchar_p(addon.path)
 	platformResources.pDatPtr_Table = None
 	platformDll.vplatform_GetInterfaces(byref(installResources), byref(platformResources))
 
@@ -212,7 +179,7 @@ def initialize(indexCallback=None):
 	# and allocate PCM and mark buffers
 	pcmBuf = (c_byte * pcmBufLen)()
 	markBuf = (VAUTO_MARKINFO * markBufSize)()
-	# Create a wave player.
+	# Create a wave player
 	# sampleRate = sampleRateConversions[getParameter(VAUTO_PARAM_FREQUENCY)]
 	sampleRate = 22050
 
@@ -224,7 +191,7 @@ def initialize(indexCallback=None):
 			# Legacy audio device configuration used by older NVDA versions.
 			outputDevice = config.conf["speech"].get("outputDevice", "default")
 		except Exception:
-			# The bridge host may not have the full audio configuration loaded.
+			# Fall back to the default audio device if configuration is unavailable.
 			outputDevice = "default"
 
 	log.info(
@@ -237,6 +204,7 @@ def initialize(indexCallback=None):
 		bitsPerSample=16,
 		outputDevice=outputDevice,
 	)
+
 
 def open(voice=None):
 	""" Opens and returns a TTS instance."""
@@ -293,7 +261,7 @@ def freeLibrary(handle):
 def postTerminate():
 	global hSpeechClass, vautoDll, platformDll
 	global pcmBuf, markBuf
-	if hSpeechClass is not None and vautoDll is not None:
+	if hSpeechClass is not None:
 		try:
 			vautoDll.vauto_ttsUnInitialize(hSpeechClass)
 		except VautoError:
@@ -301,20 +269,15 @@ def postTerminate():
 		hSpeechClass = None
 	pcmBuf = None
 	markBuf = None
-	if platformDll is not None and installResources is not None:
-		try:
-			platformDll.vplatform_ReleaseInterfaces(byref(installResources))
-		except VautoError:
-			pass
-	for dll in (vautoDll, platformDll):
-		if dll is None:
-			continue
-		try:
-			freeLibrary(dll._handle)
-		except WindowsError:
-			log.exception("Can not unload dll.")
-	vautoDll = None
-	platformDll = None
+	platformDll.vplatform_ReleaseInterfaces(byref(installResources))
+	try:
+		freeLibrary(vautoDll._handle)
+		freeLibrary(platformDll._handle)
+	except WindowsError as e:
+		log.exception("Can not unload dll.")
+	finally:
+		del vautoDll
+		del platformDll
 
 def processText2Speech(instance, text):
 	""" Sends text to be spoken."""

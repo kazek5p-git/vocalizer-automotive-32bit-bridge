@@ -1,16 +1,21 @@
+# Slovak translation for Vocalizer Automotive Driver 2.1.6.
+# This file is distributed under the same license as the add-on.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Vocalizer Automotive 32-bit Bridge\n"
+"Project-Id-Version: Vocalizer Automotive Driver 2.1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-04 20:21+0200\n"
-"PO-Revision-Date: 2026-08-04 00:00+0000\n"
+"POT-Creation-Date: 2023-02-18 01:22+0000\n"
+"PO-Revision-Date: 2026-08-05 00:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:33
 #, python-brace-format
 msgid ""
 "\n"
@@ -26,8 +31,7 @@ msgid ""
 "Copyright (C) 2011 Nuance Communications, Inc. All rights reserved.\n"
 "\n"
 "Synthesizer Version: {synthVersion}\n"
-"This copy of the Nuance Vocalizer synthesizer is licensed to be used "
-"exclusively with the NVDA screen reader (Non Visual Desktop Access).\n"
+"This copy of the Nuance Vocalizer synthesizer is licensed to be used exclusively with the NVDA screen reader (Non Visual Desktop Access).\n"
 "\n"
 "License information:\n"
 "{licenseInfo}\n"
@@ -44,18 +48,11 @@ msgid ""
 "\n"
 " Version: {driverVersion}\n"
 " \n"
-" NVDA speech driver and interface for Nuance Vocalizer is covered by the GNU "
-"General Public License (Version 2). You are free to share or change this "
-"software in any way you like as long as it is accompanied by the license and "
-"you make all source code available to anyone who wants it. This applies to "
-"both original and modified copies of this software, plus any derivative "
-"works.\n"
+" NVDA speech driver and interface for Nuance Vocalizer is covered by the GNU General Public License (Version 2). You are free to share or change this software in any way you like as long as it is accompanied by the license and you make all source code available to anyone who wants it. This applies to both original and modified copies of this software, plus any derivative works.\n"
 "For further details, you can view the license from the NVDA Help menu.\n"
-"It can also be viewed online at: http://www.gnu.org/licenses/old-licenses/"
-"gpl-2.0.html\n"
+"It can also be viewed online at: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html\n"
 "\n"
-"This component was developed by Tiflotecnia, LDA and Rui Batista, with "
-"contributions from many others. Special thanks goes to:\n"
+"This component was developed by Tiflotecnia, LDA and Rui Batista, with contributions from many others. Special thanks goes to:\n"
 "{contributors}\n"
 msgstr ""
 "\n"
@@ -71,8 +68,7 @@ msgstr ""
 "Copyright (C) 2011 Nuance Communications, Inc. Všetky práva vyhradené.\n"
 "\n"
 "Verzia syntetizátora: {synthVersion}\n"
-"Táto kópia syntetizátora Nuance Vocalizer je licencovaná výhradne na "
-"používanie s čítačom obrazovky NVDA (Non Visual Desktop Access).\n"
+"Táto kópia syntetizátora Nuance Vocalizer je licencovaná výhradne na používanie s čítačom obrazovky NVDA (Non Visual Desktop Access).\n"
 "\n"
 "Informácie o licencii:\n"
 "{licenseInfo}\n"
@@ -89,22 +85,130 @@ msgstr ""
 "\n"
 " Verzia: {driverVersion}\n"
 " \n"
-" Ovládač reči a rozhranie NVDA pre Nuance Vocalizer podliehajú licencii GNU "
-"General Public License (verzia 2). Tento softvér môžete zdieľať alebo meniť, "
-"ak k nemu priložíte licenciu a sprístupníte úplný zdrojový kód každému, kto "
-"oň požiada. Platí to pre pôvodné aj upravené kópie softvéru a odvodené "
-"diela.\n"
+" Ovládač reči a rozhranie NVDA pre Nuance Vocalizer podliehajú licencii GNU General Public License (verzia 2). Tento softvér môžete zdieľať alebo meniť, ak k nemu priložíte licenciu a sprístupníte úplný zdrojový kód každému, kto oň požiada. Platí to pre pôvodné aj upravené kópie softvéru a odvodené diela.\n"
 "Ďalšie podrobnosti nájdete v licencii v ponuke Pomocník NVDA.\n"
-"Licencia je dostupná aj na adrese: http://www.gnu.org/licenses/old-licenses/"
-"gpl-2.0.html\n"
+"Licencia je dostupná aj na adrese: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html\n"
 "\n"
-"Túto súčasť vyvinuli Tiflotecnia, LDA a Rui Batista za prispenia mnohých "
-"ďalších. Osobitné poďakovanie patrí:\n"
+"Túto súčasť vyvinuli Tiflotecnia, LDA a Rui Batista za prispenia mnohých ďalších. Osobitné poďakovanie patrí:\n"
 "{contributors}\n"
 
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:82
+msgid "No License."
+msgstr "Bez licencie."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:118
+msgid "Automatic &Language Switching Settings"
+msgstr "Nastavenia automatického prepínania &jazyka"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:118
+msgid "Configure which voice is to be used for each language."
+msgstr "Nastavte hlas používaný pre jednotlivé jazyky."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:124
+msgid "Enter License"
+msgstr "Zadať licenciu"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:124
+msgid "Enter your license data for this computer."
+msgstr "Zadajte údaje licencie Automotive pre tento počítač."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:128
+msgid "Remove License"
+msgstr "Odstrániť licenciu"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:128
+msgid "Remove your license from this NVDA copy"
+msgstr "Odstráňte licenciu Automotive z tejto kópie NVDA."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:131
+msgid "Download More Voices"
+msgstr "Stiahnuť ďalšie hlasy"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:131
+msgid "Open the vocalizer voices download page."
+msgstr "Otvorte stránku na stiahnutie hlasov Vocalizer."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:134
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:247
 msgid "About Nuance Vocalizer for NVDA"
 msgstr "O programe Nuance Vocalizer pre NVDA"
 
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:137
+#| msgid "Vocalizer"
+msgid "VocalizerAutomotive"
+msgstr "Vocalizer Automotive"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:150
+msgid ""
+"Choose the file that contains your license data on the dialog that will be opened.\n"
+"\n"
+"If you don't have a vocalizer license for NVDA or are expiriencing other problems please contact Tiflotecnia, LDA. \n"
+"(tiflotecnia@tiflotecnia.com)\n"
+"or your Vocalizer for NVDA distributor.\n"
+"\n"
+"Unauthorized use of this product (i.g. without a valid license) is not allowed by most international laws on software rights.\n"
+"The license file is intended soley for your private use.\n"
+"If the Nuance Vocalizer license file doesn't belong to you should reframe from using this product.\n"
+"\n"
+"Please note that a proportion of the price of Nuance Vocalizer for NVDA is donated for continuing NVDA's development.\n"
+"Any shared license files will reduce donations to NVDA and good/cheap accessibility for the blind across the world.\n"
+"Further more, Nuance Vocalizer for NVDA is priced at the lowest value possible, to allow as many people as possible to have a comercial syntheciser for NVDA.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"V dialógovom okne, ktoré sa otvorí, vyberte súbor obsahujúci údaje vašej licencie.\n"
+"\n"
+"Ak nemáte licenciu Vocalizer pre NVDA alebo máte iné problémy, obráťte sa na spoločnosť Tiflotecnia, LDA.\n"
+"(tiflotecnia@tiflotecnia.com)\n"
+"alebo na svojho distribútora Vocalizer pre NVDA.\n"
+"\n"
+"Neoprávnené používanie tohto produktu (napríklad bez platnej licencie) nie je podľa väčšiny medzinárodných zákonov o právach k softvéru povolené.\n"
+"Licenčný súbor je určený výhradne na vaše súkromné použitie.\n"
+"Ak vám licenčný súbor Nuance Vocalizer nepatrí, nemali by ste tento produkt používať.\n"
+"\n"
+"Časť ceny produktu Nuance Vocalizer pre NVDA sa venuje na pokračovanie vývoja NVDA.\n"
+"Každý zdieľaný licenčný súbor znižuje príspevky pre NVDA a podporu kvalitnej a cenovo dostupnej prístupnosti pre nevidiacich na celom svete.\n"
+"Produkt Nuance Vocalizer pre NVDA má navyše stanovenú najnižšiu možnú cenu, aby mohlo komerčný syntetizátor pre NVDA používať čo najviac ľudí.\n"
+"\n"
+"Chcete pokračovať?"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:165
+msgid "Entering License Data:"
+msgstr "Zadávanie licenčných údajov:"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:168
+msgid "Choose license file"
+msgstr "Vyberte súbor licencie Vocalizer"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:169
+msgid "Nuance Vocalizer license files"
+msgstr "Licenčné súbory Nuance Vocalizer"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:180
+msgid ""
+"License entered successfully!\n"
+"For all changes to take effect NVDA must be restarted.\n"
+"Do you want to restart NVDA now?"
+msgstr ""
+"Licencia bola úspešne zadaná!\n"
+"Aby sa prejavili všetky zmeny, je potrebné reštartovať NVDA.\n"
+"Chcete to urobiť teraz?"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:183
+msgid "Success!"
+msgstr "Úspech!"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:187
+#, python-brace-format
+msgid "Error copying license data: {error}"
+msgstr "Chyba pri kopírovaní údajov licencie: {error}"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:188
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:211
+msgid "Error"
+msgstr "Chyba"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:191
 msgid ""
 "Are you sure you want to remove your license?\n"
 "This can not be reverted."
@@ -112,150 +216,113 @@ msgstr ""
 "Naozaj chcete odstrániť licenciu?\n"
 "Túto operáciu nie je možné vrátiť späť."
 
-msgid "Automatic &Language Switching Settings"
-msgstr "Nastavenia automatického prepínania &jazyka"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:193
+msgid "Remove License?"
+msgstr "Odstrániť licenciu?"
 
-msgid "Choose license file"
-msgstr "Vyberte súbor licencie Vocalizer"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:207
+msgid "License successfully removed. Restart NVDA fo the changes to ttake effect."
+msgstr "Licencia bola úspešne odstránená. Reštartujte NVDA, aby sa zmeny prejavili."
 
-msgid "Configure which voice is to be used for each language."
-msgstr "Nastavte hlas používaný pre jednotlivé jazyky."
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:208
+msgid "License removed"
+msgstr "Licencia odstránená"
 
-msgid "Distributor: "
-msgstr "Distribútor: "
-
-msgid "Download More Voices"
-msgstr "Stiahnuť ďalšie hlasy"
-
-msgid "Enter License"
-msgstr "Zadať licenciu"
-
-msgid "Enter your license data for this computer."
-msgstr "Zadajte údaje licencie Automotive pre tento počítač."
-
-msgid "Entering License Data:"
-msgstr "Zadávanie licenčných údajov:"
-
-msgid "Error"
-msgstr "Chyba"
-
-#, python-brace-format
-msgid "Error copying license data: {error}"
-msgstr "Chyba pri kopírovaní údajov licencie: {error}"
-
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:211
 #, python-brace-format
 msgid "Error removing license: {error}"
 msgstr "Chyba pri odstraňovaní licencie: {error}"
 
-msgid "License Number: "
-msgstr "Číslo licencie: "
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:225
+msgid "License data not available"
+msgstr "Údaje o licencii nie sú dostupné"
 
-msgid ""
-"License entered successfully!\n"
-"For all changes to take effect NVDA must be restarted.\n"
-"Do you want to restart NVDA now?"
-msgstr ""
-"Licencia bola úspešne zadaná!\n"
-"Aby sa všetky zmeny prejavili, NVDA sa musí reštartovať.\n"
-"Chcete to urobiť teraz?"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:232
+#, python-format
+msgid "Demo license. Expiration date: %s"
+msgstr "Ukážková licencia. Dátum skončenia platnosti: %s"
 
-msgid "License file found, but detailed information is unavailable."
-msgstr "Súbor s licenciou sa našiel, ale podrobné informácie nie sú dostupné."
-
-msgid "License removed. Restart NVDA for the change to take effect."
-msgstr "Licencia bola odstránená. Reštartujte NVDA, aby sa zmena prejavila."
-
-msgid ""
-"License validity is checked by the 32-bit Automotive host. Detailed license "
-"errors are not available through the current 64/32-bit bridge."
-msgstr ""
-"Skutočnú platnosť licencie overuje 32-bitový hostiteľ Automotive. Podrobné "
-"chyby licencie nie sú dostupné prostredníctvom súčasného 64/32-bitového "
-"mosta."
-
-msgid "Locale Name:"
-msgstr "Názov jazyka:"
-
-msgid "No Automotive voice resources were found."
-msgstr "Nenašli sa žiadne hlasové prostriedky Automotive."
-
-msgid "No License."
-msgstr "Bez licencie."
-
-# Restored for the original Vocalizer Automotive missing-voices behavior.
-msgid "No voices installed."
-msgstr "Nie sú nainštalované žiadne hlasy."
-
-msgid "Nuance Vocalizer license files"
-msgstr "Licenčné súbory Nuance Vocalizer"
-
-msgid "Open the vocalizer voices download page."
-msgstr "Otvorte stránku na stiahnutie hlasov Vocalizer."
-
-msgid "Remove License"
-msgstr "Odstrániť licenciu"
-
-msgid "Remove License?"
-msgstr "Odstrániť licenciu?"
-
-msgid "Remove your license from this NVDA copy"
-msgstr "Odstráňte licenciu Automotive z tejto kópie NVDA."
-
-msgid "Select a language, and then configure the voice to be used:"
-msgstr "Vyberte jazyk a potom nastavte používaný hlas:"
-
-msgid "Success!"
-msgstr "Úspech!"
-
-msgid "The license file exists but could not be read."
-msgstr "Súbor s licenciou existuje, ale nedá sa prečítať."
-
-msgid "The license file was copied, but its data could not be read."
-msgstr "Súbor s licenciou bol skopírovaný, ale jeho údaje sa nedajú prečítať."
-
-msgid "Unknown"
-msgstr "Neznáma"
-
-msgid ""
-"Use your own Vocalizer license file. The selected file will be copied to "
-"your NVDA configuration.\n"
-"\n"
-"The Automotive engine will check the license after NVDA is restarted. Due to "
-"limitations of communication between 64-bit NVDA and the 32-bit host, a "
-"detailed reason for rejecting the license may not be displayed. If the "
-"engine rejects the license, the synthesizer may simply fail to load.\n"
-"\n"
-"Do you want to continue?"
-msgstr ""
-"Použite vlastný licenčný súbor Vocalizer. Vybraný súbor sa skopíruje do "
-"konfigurácie NVDA.\n"
-"\n"
-"Licenciu overí engine Automotive po reštartovaní NVDA. Z dôvodu obmedzení "
-"komunikácie medzi 64-bitovým NVDA a 32-bitovým hostiteľom sa nemusí zobraziť "
-"podrobný dôvod odmietnutia licencie. Ak engine licenciu odmietne, "
-"syntetizátor sa jednoducho nemusí načítať.\n"
-"\n"
-"Chcete pokračovať?"
-
-msgid "User Identification: "
-msgstr "Identifikácia používateľa: "
-
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:239
 msgid "User Name: "
 msgstr "Meno používateľa: "
 
-msgid "Vocalizer Automatic Language Switching Settings"
-msgstr "Nastavenia automatického prepínania jazyka Vocalizer"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:240
+msgid "User Identification: "
+msgstr "Identifikácia používateľa: "
 
-msgid "Vocalizer Automotive"
-msgstr "Vocalizer Automotive"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:241
+msgid "License Number: "
+msgstr "Číslo licencie: "
 
-msgid "Vocalizer Automotive management options"
-msgstr "Možnosti správy Vocalizer Automotive"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:242
+msgid "Distributor: "
+msgstr "Distribútor: "
 
-msgid "Voice Name:"
-msgstr "Názov hlasu:"
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:261
+#, python-brace-format
+msgid ""
+"The Nuance Vocalizer for NVDA demonstration license has expired.\n"
+"To buy a  license for Nuance Vocalizer for NVDA, please visit {url}, or contact an authorized distributor.\n"
+"Note that a percentage of the license's price is donated to NV Access, ltd, to help continuing the development of the NVDA screen reader."
+msgstr ""
+"Platnosť ukážkovej licencie Nuance Vocalizer pre NVDA vypršala.\n"
+"Ak si chcete kúpiť licenciu Nuance Vocalizer pre NVDA, navštívte stránku {url} alebo kontaktujte autorizovaného distribútora.\n"
+"Časť ceny licencie sa poskytuje spoločnosti NV Access Ltd. na pokračovanie vývoja čítača obrazovky NVDA."
 
-# Restored for the original Vocalizer Automotive missing-voices behavior.
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:264
+msgid "Vocalizer Demo Expired"
+msgstr "Platnosť ukážkovej verzie Vocalizer vypršala"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:269
+msgid ""
+"The Vocalizer license you are trying to use is invalid.\n"
+"This might be happening due to one of two reasons:\n"
+"1. The license file is damaged or is not a valid license file.\n"
+"2. The license was disabled for security reasons, due to illegal use or its data beeing compromized.\n"
+"If you own a license for Nuance Vocalizer for NVDA, please contact Tiflotecnia, lda. or your local distributor, so the problem can be further investigated.\n"
+"If this Nuance Vocalizer for NVDA license file doesn't belong to you should reframe from using this product.\n"
+"Unauthorized use of this product (i.g. without a valid license) is not allowed by most international laws on software rights.\n"
+"Please note that a proportion of the price of Nuance Vocalizer for NVDA is donated for continuing NVDA's development.\n"
+"By sharing license files you are working against NVDA and good and cheap accessibility for the blind across the world.\n"
+"Further more, Nuance Vocalizer for NVDA is priced at the lowest value possible, to allow as many people as possible to have a comercial quality syntheciser in NVDA.\n"
+"Please think twice about it.\n"
+"You can remove this invalid license using  the Vocalizer menu."
+msgstr ""
+"Licencia Vocalizer, ktorú sa pokúšate použiť, je neplatná.\n"
+"Môže to mať jeden z dvoch dôvodov:\n"
+"1. Licenčný súbor je poškodený alebo nie je platným licenčným súborom.\n"
+"2. Licencia bola z bezpečnostných dôvodov deaktivovaná pre nezákonné používanie alebo prezradenie jej údajov.\n"
+"Ak vlastníte licenciu Nuance Vocalizer pre NVDA, obráťte sa na spoločnosť Tiflotecnia, LDA. alebo na miestneho distribútora, aby bolo možné problém podrobnejšie preskúmať.\n"
+"Ak vám tento licenčný súbor Nuance Vocalizer pre NVDA nepatrí, nemali by ste tento produkt používať.\n"
+"Neoprávnené používanie tohto produktu (napríklad bez platnej licencie) nie je podľa väčšiny medzinárodných zákonov o právach k softvéru povolené.\n"
+"Časť ceny produktu Nuance Vocalizer pre NVDA sa venuje na pokračovanie vývoja NVDA.\n"
+"Zdieľaním licenčných súborov konáte proti NVDA a kvalitnej a cenovo dostupnej prístupnosti pre nevidiacich na celom svete.\n"
+"Produkt Nuance Vocalizer pre NVDA má navyše stanovenú najnižšiu možnú cenu, aby mohlo komerčný syntetizátor pre NVDA používať čo najviac ľudí.\n"
+"Dobre si to rozmyslite.\n"
+"Túto neplatnú licenciu môžete odstrániť pomocou ponuky Vocalizer."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:281
+msgid "Vocalizer License is Invalid."
+msgstr "Licencia Vocalizer je neplatná."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:290
+#, python-brace-format
+msgid ""
+"You are running a demo version of Nuance Vocalizer for NVDA.\n"
+"This demo will expire on {date}. To use the syntheciser after that,\n"
+"You must buy a license. You can do so at any time visiting {url} or contacting a local distributor.\n"
+"Thanks for testing Nuance Vocalizer for NVDA."
+msgstr ""
+"Používate ukážkovú verziu Nuance Vocalizer pre NVDA.\n"
+"Platnosť tejto ukážkovej verzie vyprší {date}. Ak chcete syntetizátor používať aj potom,\n"
+"musíte si kúpiť licenciu. Môžete tak urobiť kedykoľvek na stránke {url} alebo kontaktovaním miestneho distribútora.\n"
+"Ďakujeme, že testujete Nuance Vocalizer pre NVDA."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:294
+msgid "Vocalizer Demo Version"
+msgstr "Ukážková verzia Vocalizer"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:299
 msgid ""
 "You have no Vocalizer voices installed.\n"
 "You need at least one voice installed to use Vocalizer for NVDA.\n"
@@ -263,7 +330,62 @@ msgid ""
 "Would you want to open the vocalizer for NVDA voices download page now?"
 msgstr ""
 "Nemáte nainštalované žiadne hlasy Vocalizer.\n"
-"Na používanie Vocalizera pre NVDA potrebujete mať nainštalovaný aspoň jeden "
-"hlas.\n"
+"Na používanie Vocalizera pre NVDA potrebujete mať nainštalovaný aspoň jeden hlas.\n"
 "Všetky hlasy Vocalizer si môžete stiahnuť z webovej stránky produktu.\n"
 "Chcete teraz otvoriť stránku na stiahnutie hlasov Vocalizer pre NVDA?"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\__init__.py:303
+msgid "No voices installed."
+msgstr "Nie sú nainštalované žiadne hlasy."
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\dialogs.py:19
+msgid "Vocalizer Automatic Language Switching Settings"
+msgstr "Nastavenia automatického prepínania jazyka Vocalizer"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\dialogs.py:30
+msgid "Select a locale, and then configure the voice to be used:"
+msgstr "Vyberte jazyk a oblasť a potom nastavte hlas, ktorý sa má používať:"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\dialogs.py:34
+msgid "Locale Name:"
+msgstr "Názov jazyka:"
+
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\dialogs.py:41
+msgid "Voice Name:"
+msgstr "Názov hlasu:"
+
+#. Translators: Message dialog box to ask user if wants to update.
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\update.py:99
+msgid ""
+"It is available a new version of this add-on.\n"
+" Do you want to update?"
+msgstr ""
+"Je dostupná nová verzia tohto doplnku.\n"
+" Chcete vykonať aktualizáciu?"
+
+#. Translators: Message dialog box to inform user that the add-on is not compatible
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\update.py:134
+msgid ""
+"This new version of this add-on is not compatible with your version of NVDA.\n"
+" The update process will be terminated."
+msgstr ""
+"Táto nová verzia doplnku nie je kompatibilná s vašou verziou NVDA.\n"
+" Proces aktualizácie bude ukončený."
+
+#. Translators: Checkbox name in the configuration dialog
+#: addon\globalPlugins\vocalizer_automotive_globalPlugin\update.py:157
+msgid "Check for updates at startup"
+msgstr "Pri spustení kontrolovať aktualizácie"
+
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on
+#. to be shown on installation and add-on information found in Add-ons Manager.
+#: buildVars.py:23
+msgid "Nuance Vocalizer 5.5 Driver"
+msgstr "Ovládač Nuance Vocalizer 5.5"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:26
+msgid "Nuance Vocalizer 5.5 speech synthesizer driver and interface for NVDA."
+msgstr "Ovládač a rozhranie hlasového syntetizátora Nuance Vocalizer 5.5 pre NVDA."

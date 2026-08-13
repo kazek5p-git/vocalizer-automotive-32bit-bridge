@@ -1,41 +1,38 @@
+# -*- coding: utf-8 -*-
 #vocalizer_globalPlugin/__init__.py
 #A part of the vocalizer driver for NVDA (Non Visual Desktop Access)
 #Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
-#Copyright (C) 2026 DJ Graco and Kazek5p.
-#Modified by DJ Graco and Kazek5p on 2026-08-06.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
-import os
+# Import the necessary modules
+import datetime
+import gettext
+import os.path
 import shutil
+import time
 import webbrowser
-
+import subprocess
 import configobj
 import wx
 import addonHandler
+# Start the translating process
+addonHandler.initTranslation()
 import core
-import globalPluginHandler
 import globalVars
+import globalPluginHandler
 import gui
 import languageHandler
 from logHandler import log
+import speech
+from .dialogs import *
+from .utils import *
 
-addonHandler.initTranslation()
 
-from .dialogs import VocalizerLanguageSettingsDialog, getInstalledVoiceLocaleMap
-
-
-BRIDGE_SYNTH_NAME = "vocalizerAutomotive32"
-URL = "http://vocalizer-nvda.com"
-VOICE_DOWNLOADS_URL_TEMPLATE = (
-	"http://www.vocalizer-nvda.com/downloads_redirect.php?lang={lang}"
-)
-CONTRIBUTORS = "NV Access ltd, Ângelo Abrantes, Diogo Costa, Mesar Hameed, Babbage B.V.."
-
-ABOUT_MESSAGE = _("""
+aboutMessage =_("""
  URL: {url}
-\x20
+ 
 This product is composed of two independent components:
 - Nuance Vocalizer speech synthesizer.
 - NVDA speech driver and interface for Nuance Vocalizer.
@@ -62,7 +59,7 @@ Copyright (C) 2012 Rui Batista.
 Copyright (C) 2019 Babbage B.V.
 
  Version: {driverVersion}
-\x20
+ 
  NVDA speech driver and interface for Nuance Vocalizer is covered by the GNU General Public License (Version 2). You are free to share or change this software in any way you like as long as it is accompanied by the license and you make all source code available to anyone who wants it. This applies to both original and modified copies of this software, plus any derivative works.
 For further details, you can view the license from the NVDA Help menu.
 It can also be viewed online at: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -71,334 +68,237 @@ This component was developed by Tiflotecnia, LDA and Rui Batista, with contribut
 {contributors}
 """)
 
-LICENSE_IMPORT_WARNING = _(
-	"Use your own Vocalizer license file. The selected file will be copied "
-	"to your NVDA configuration.\n\n"
-	"The Automotive engine will check the license after NVDA is restarted. "
-	"Due to limitations of communication between 64-bit NVDA and the 32-bit "
-	"host, a detailed reason for rejecting the license may not be displayed. "
-	"If the engine rejects the license, the synthesizer may simply fail to "
-	"load.\n\n"
-	"Do you want to continue?"
-)
+contributors = "NV Access ltd, ângelo Abrantes, Diogo Costa, Mesar Hameed, Babbage B.V.."
 
+
+URL = "http://vocalizer-nvda.com"
+VOICE_DOWNLOADS_URL_TEMPLATE = "http://www.vocalizer-nvda.com/downloads_redirect.php?lang={lang}"
 
 def getDefaultLicensePath():
-	appArgs = getattr(globalVars, "appArgs", None)
-	configPath = getattr(appArgs, "configPath", None)
-	if not configPath:
-		configPath = os.path.join(os.environ.get("APPDATA", ""), "nvda")
-	return os.path.join(configPath, "vocalizer_license.ini")
-
+	import globalVars
+	return os.path.join(globalVars.appArgs.configPath, "vocalizer_license.ini")
 
 def getLicenseInfo():
-	path = getDefaultLicensePath()
-	if not os.path.isfile(path):
-		return "none"
+	licenseInfo = _("No License.")
+	from synthDrivers.vocalizerAutomotive import _vocalizer
 	try:
-		licenseData = configobj.ConfigObj(
-			path,
-			default_encoding="utf-8",
-			encoding="utf-8",
-		)
-		info = licenseData.get("info", {})
-		requiredFields = ("username", "userid", "licenseid", "distributor")
-		if all(info.get(field) for field in requiredFields):
-			return "licensed:" + path
-	except Exception:
-		log.debugWarning("Unable to read Vocalizer license file.", exc_info=True)
-	return "invalid"
-
-
-def _getDriverVersion():
-	try:
-		addon = addonHandler.getCodeAddon()
-		return addon.manifest["version"]
-	except Exception:
-		log.debugWarning("Unable to read Automotive driver version.", exc_info=True)
-		return _("Unknown")
-
-
-def _getLicenseSummary():
-	licenseInfo = getLicenseInfo()
-	if licenseInfo == "none":
-		return _("No License.")
-	if licenseInfo == "invalid":
-		return _("The license file exists but could not be read.")
-
-	path = licenseInfo.split(":", 1)[1]
-	try:
-		licenseData = configobj.ConfigObj(
-			path,
-			default_encoding="utf-8",
-			encoding="utf-8",
-		)
-		info = licenseData["info"]
-		return "\n".join(
-			(
-				_("User Name: ") + info.get("username", ""),
-				_("User Identification: ") + info.get("userid", ""),
-				_("License Number: ") + info.get("licenseid", ""),
-				_("Distributor: ") + info.get("distributor", ""),
-				_(
-					"License validity is checked by the 32-bit Automotive host. "
-					"Detailed license errors are not available through the current "
-					"64/32-bit bridge."
-				),
-			)
-		)
-	except Exception:
-		log.debugWarning("Unable to format Vocalizer license information.", exc_info=True)
-		return _("License file found, but detailed information is unavailable.")
+		licenseInfo = _vocalizer.getLicenseInfo()
+	except _vocalizer.VautoError:
+		pass
+	return licenseInfo
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
-	scriptCategory = _("Vocalizer Automotive")
-
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
-		self.menu = None
-		self.submenu_vocalizer = None
-		self.menuItem = None
-		self._terminating = False
-		self._noVoicesWarning = None
+		self._running = False
 		if globalVars.appArgs.secure:
 			return
-		try:
+
+		# See if we have at least one voice installed
+		if not any(addon.name.startswith("vocalizer-voice-") for addon in addonHandler.getRunningAddons()):
+			wx.CallLater(2000, self.onNoVoicesInstalled)
+			return
+		with VocalizerOpened():
 			self.createMenu()
-		except Exception:
-			log.error("Unable to create Vocalizer Automotive menu.", exc_info=True)
-		try:
-			if not getInstalledVoiceLocaleMap():
-				self._noVoicesWarning = wx.CallLater(
-					2000,
-					self.onNoVoicesInstalled,
-				)
-		except Exception:
-			log.debugWarning("Unable to check for Automotive voices.", exc_info=True)
+			self.showInformations()
+		self._running = True
 
 	def createMenu(self):
+		self.submenu_items = []
 		self.submenu_vocalizer = wx.Menu()
-		sysTrayIcon = gui.mainFrame.sysTrayIcon
-		self.menu = sysTrayIcon.menu
-
-		item = self.submenu_vocalizer.Append(
-			wx.ID_ANY,
-			_("Automatic &Language Switching Settings"),
-			_("Configure which voice is to be used for each language."),
-		)
-		sysTrayIcon.Bind(wx.EVT_MENU, self.onLanguageSettings, item)
-
+		item = self.submenu_vocalizer.Append(wx.ID_ANY, _("Automatic &Language Switching Settings"), _("Configure which voice is to be used for each language."))
+		self.submenu_items.append(item)
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU , lambda e : gui.mainFrame._popupSettingsDialog(VocalizerLanguageSettingsDialog), item)
 		licenseInfo = getLicenseInfo()
-		if licenseInfo.startswith("licensed:") or licenseInfo == "invalid":
-			item = self.submenu_vocalizer.Append(
-				wx.ID_ANY,
-				_("Remove License"),
-				_("Remove your license from this NVDA copy"),
-			)
-			sysTrayIcon.Bind(wx.EVT_MENU, self.onVocalizerLicenseRemoveMenu, item)
+		isLicensed = licenseInfo.startswith("licensed")
+		if not isLicensed and licenseInfo != "invalid":
+			item = self.submenu_vocalizer.Append(wx.ID_ANY, _("Enter License"), _("Enter your license data for this computer."))
+			self.submenu_items.append(item)
+			gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU , self.onVocalizerLicenseMenu, item)
 		else:
-			item = self.submenu_vocalizer.Append(
-				wx.ID_ANY,
-				_("Enter License"),
-				_("Enter your license data for this computer."),
-			)
-			sysTrayIcon.Bind(wx.EVT_MENU, self.onVocalizerLicenseMenu, item)
-
-		item = self.submenu_vocalizer.Append(
-			wx.ID_ANY,
-			_("Download More Voices"),
-			_("Open the vocalizer voices download page."),
-		)
-		sysTrayIcon.Bind(wx.EVT_MENU, self.onVoicesDownload, item)
-
-		item = self.submenu_vocalizer.Append(
-			wx.ID_ANY,
-			_("About Nuance Vocalizer for NVDA"),
-		)
-		sysTrayIcon.Bind(wx.EVT_MENU, self.onAbout, item)
-
-		self.menuItem = self.menu.Insert(
-			2,
-			wx.ID_ANY,
-			_("Vocalizer Automotive"),
-			self.submenu_vocalizer,
-			_("Vocalizer Automotive management options"),
-		)
+			item = self.submenu_vocalizer.Append(wx.ID_ANY, _("Remove License"), _("Remove your license from this NVDA copy"))
+			self.submenu_items.append(item)
+			gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU , self.onVocalizerLicenseRemoveMenu, item)
+		item = self.submenu_vocalizer.Append(wx.ID_ANY, _("Download More Voices"), _("Open the vocalizer voices download page."))
+		self.submenu_items.append(item)
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onVoicesDownload, item)
+		item = self.submenu_vocalizer.Append(wx.ID_ANY, _("About Nuance Vocalizer for NVDA"))
+		self.submenu_items.append(item)
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU , self.onAbout, item)
+		self.submenu_item = gui.mainFrame.sysTrayIcon.menu.Insert(2, wx.ID_ANY, _("VocalizerAutomotive"), self.submenu_vocalizer)
 
 	def removeMenu(self):
-		if self.menuItem is None:
-			return
-		try:
-			self.menu.Remove(self.menuItem)
-		except Exception:
-			log.debugWarning(
-				"Unable to remove Vocalizer Automotive menu item.",
-				exc_info=True,
-			)
-		self.menuItem = None
-		self.menu = None
-		self.submenu_vocalizer = None
+		if self.submenu_item is not None:
+			try:
+				gui.mainFrame.sysTrayIcon.menu.Remove(self.submenu_item)
+			except AttributeError: # We can get this somehow from wx python when NVDA is shuttingdown, just ignore
+				pass
+			self.submenu_item.Destroy()
 
-	def reinitializeMenu(self):
-		if self._terminating:
-			return
-		try:
-			# Follow the current Tiflotecnia menu pattern: remove only the
-			# parent item. Destroying the active wx.Menu can terminate NVDA.
-			self.removeMenu()
-			self.createMenu()
-		except Exception:
-			log.error("Unable to reinitialize Vocalizer Automotive menu.", exc_info=True)
-
-	def onLanguageSettings(self, event):
-		if not getInstalledVoiceLocaleMap():
-			gui.messageBox(
-				_("No Automotive voice resources were found."),
-				_("Vocalizer Automotive"),
-				wx.OK | wx.ICON_INFORMATION,
-			)
-			return
-		gui.mainFrame._popupSettingsDialog(VocalizerLanguageSettingsDialog)
-
-	def onNoVoicesInstalled(self):
-		self._noVoicesWarning = None
-		if self._terminating or getInstalledVoiceLocaleMap():
-			return
-		if (
-			gui.messageBox(
-				_(
-					"You have no Vocalizer voices installed.\n"
-					"You need at least one voice installed to use Vocalizer for NVDA.\n"
-					"You can download all Vocalizer voices from the product web page.\n"
-					"Would you want to open the vocalizer for NVDA voices download page now?"
-				),
-				_("No voices installed."),
-				wx.YES_NO | wx.ICON_WARNING,
-			)
-			== wx.YES
-		):
-			self._openVoicesDownload()
 
 	def onVocalizerLicenseMenu(self, event):
-		if (
-			gui.messageBox(
-				LICENSE_IMPORT_WARNING,
-				_("Entering License Data:"),
-				wx.YES_NO | wx.ICON_QUESTION,
-			)
-			!= wx.YES
-		):
-			return
-
 		licensePath = getDefaultLicensePath()
-		fd = wx.FileDialog(
-			gui.mainFrame,
-			message=_("Choose license file"),
-			wildcard=_("Nuance Vocalizer license files") + "|license*.ini",
-			defaultDir=os.path.dirname(licensePath),
-			style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST,
-		)
-		try:
+		ret = gui.messageBox(_("""Choose the file that contains your license data on the dialog that will be opened.
+
+If you don't have a vocalizer license for NVDA or are expiriencing other problems please contact Tiflotecnia, LDA. 
+(tiflotecnia@tiflotecnia.com)
+or your Vocalizer for NVDA distributor.
+
+Unauthorized use of this product (i.g. without a valid license) is not allowed by most international laws on software rights.
+The license file is intended soley for your private use.
+If the Nuance Vocalizer license file doesn't belong to you should reframe from using this product.
+
+Please note that a proportion of the price of Nuance Vocalizer for NVDA is donated for continuing NVDA's development.
+Any shared license files will reduce donations to NVDA and good/cheap accessibility for the blind across the world.
+Further more, Nuance Vocalizer for NVDA is priced at the lowest value possible, to allow as many people as possible to have a comercial syntheciser for NVDA.
+
+Do you want to continue?"""),
+		caption=_("Entering License Data:"), style=wx.YES_NO|wx.ICON_QUESTION)
+		if ret == wx.YES:
+			fd = wx.FileDialog(gui.mainFrame,
+				message=_("Choose license file"),
+				wildcard=(_("Nuance Vocalizer license files")+"|license*.ini"),
+				defaultDir="c:",
+				style=wx.FD_OPEN)
 			if fd.ShowModal() != wx.ID_OK:
 				return
-			sourcePath = fd.GetPath()
-		finally:
-			fd.Destroy()
-
-		try:
-			if os.path.abspath(sourcePath) != os.path.abspath(licensePath):
-				shutil.copyfile(sourcePath, licensePath)
-			if getLicenseInfo().startswith("licensed:"):
-				restart = (
-					gui.messageBox(
-						_(
-							"License entered successfully!\n"
-							"For all changes to take effect NVDA must be restarted.\n"
-							"Do you want to restart NVDA now?"
-						),
-						_("Success!"),
-						wx.YES_NO,
-					)
-					== wx.YES
-				)
-				wx.CallAfter(self.reinitializeMenu)
-				if restart:
+			path = fd.GetPath()
+			try:
+				shutil.copy(path, licensePath)
+				with VocalizerOpened():
+					self.removeMenu()
+					self.createMenu()
+				if gui.messageBox(_("""License entered successfully!
+For all changes to take effect NVDA must be restarted.
+Do you want to restart NVDA now?"""),
+					caption=_("Success!"), style=wx.YES_NO) == wx.YES:
 					core.restart()
-			else:
-				gui.messageBox(
-					_("The license file was copied, but its data could not be read."),
-					_("Error"),
-					wx.OK | wx.ICON_ERROR,
-				)
-		except Exception as error:
-			log.error("Error entering Vocalizer license.", exc_info=True)
-			gui.messageBox(
-				_("Error copying license data: {error}").format(error=error),
-				_("Error"),
-				wx.OK | wx.ICON_ERROR,
-			)
+			except (IOError, WindowsError) as e:
+				log.debugWarning("Error entering license", exc_info=True)
+				gui.messageBox(_("Error copying license data: {error}").format(error=str(e)),
+				caption=_("Error"), style=wx.ICON_ERROR)
 
 	def onVocalizerLicenseRemoveMenu(self, event):
-		if (
-			gui.messageBox(
-				_(
-					"Are you sure you want to remove your license?\n"
-					"This can not be reverted."
-				),
-				_("Remove License?"),
-				wx.YES_NO | wx.ICON_WARNING,
-			)
-			!= wx.YES
-		):
-			return
-		try:
-			os.remove(getDefaultLicensePath())
-			gui.messageBox(
-				_("License removed. Restart NVDA for the change to take effect."),
-				_("Vocalizer Automotive"),
-				wx.OK | wx.ICON_INFORMATION,
-			)
-			wx.CallAfter(self.reinitializeMenu)
-		except FileNotFoundError:
-			pass
-		except (OSError, IOError) as error:
-			log.error("Error removing Vocalizer license.", exc_info=True)
-			gui.messageBox(
-				_("Error removing license: {error}").format(error=error),
-				_("Error"),
-				wx.OK | wx.ICON_ERROR,
-			)
+		ret = gui.messageBox(_("""Are you sure you want to remove your license?
+This can not be reverted."""),
+		caption=_("Remove License?"), style=wx.YES_NO)
+		if ret == wx.YES:
+			with VocalizerOpened():
+				licenseInfo = getLicenseInfo()
+				if licenseInfo == "invalid":
+					# Try to remove from the default path.
+					path = getDefaultLicensePath()
+				else: # licensed
+					i = licenseInfo.index(":")
+					path = licenseInfo[i+1:]
+				try:
+					os.unlink(path)
+					self.removeMenu()
+					self.createMenu()
+					gui.messageBox(_("License successfully removed. Restart NVDA fo the changes to ttake effect."),
+					caption=_("License removed"), style=wx.ICON_INFORMATION)
+				except(IOError, WindowsError) as e:
+					log.debugWarning("Error removing Vocalizer License.", exc_info=True)
+					gui.messageBox(_("Error removing license: {error}").format(error=str(e)), _("Error"))
 
 	def onVoicesDownload(self, event):
 		self._openVoicesDownload()
 
 	def _openVoicesDownload(self):
-		webbrowser.open(
-			VOICE_DOWNLOADS_URL_TEMPLATE.format(
-				lang=languageHandler.getLanguage()
-			)
-		)
+		webbrowser.open(VOICE_DOWNLOADS_URL_TEMPLATE.format(lang=languageHandler.getLanguage()))
 
 	def onAbout(self, event):
-		message = ABOUT_MESSAGE.format(
-			url=URL,
-			contributors=CONTRIBUTORS,
-			synthVersion="5.5",
-			driverVersion=_getDriverVersion(),
-			licenseInfo=_getLicenseSummary(),
-		)
-		gui.messageBox(
-			message,
-			_("About Nuance Vocalizer for NVDA"),
-			wx.OK | wx.ICON_INFORMATION,
-		)
+		from synthDrivers import vocalizerAutomotive
+		from synthDrivers.vocalizerAutomotive import _vocalizer
+		synthVersion = vocalizer.synthVersion
+		driverVersion = vocalizer.driverVersion
 
-	def terminate(self):
-		# NVDA is tearing down the wx main frame here. Explicitly removing or
-		# destroying menus can interrupt shutdown and prevent a restart.
-		self._terminating = True
-		if self._noVoicesWarning is not None:
-			self._noVoicesWarning.Stop()
-			self._noVoicesWarning = None
-		super(GlobalPlugin, self).terminate()
+		licenseInfo = _("License data not available")
+		try:
+			with VocalizerOpened():
+				licenseInfo = getLicenseInfo()
+			if licenseInfo.startswith("demo"):
+				t = int(licenseInfo.split(":")[1])
+				d = datetime.datetime.fromtimestamp(t)
+				licenseInfo = _("Demo license. Expiration date: %s") % d.strftime("%Y-%m-%d")
+			elif licenseInfo.startswith("licensed"):
+				i = licenseInfo.index(':')
+				path = licenseInfo[i+1:]
+				log.debug("Reading license information from %s", path)
+				ini = configobj.ConfigObj(path, default_encoding='utf-8', encoding='utf-8')
+				l = []
+				l.append(_("User Name: ") + ini['info']['username'])
+				l.append(_("User Identification: ") + ini['info']['userid'])
+				l.append(_("License Number: ") + ini['info']['licenseid'])
+				l.append(_("Distributor: ") + ini['info']['distributor'])
+				licenseInfo = "\n".join(l)
+		except:
+			log.exception("Error retrieving license data")
+		msg = aboutMessage.format(url=URL, contributors=contributors, **locals())
+		gui.messageBox(msg, _("About Nuance Vocalizer for NVDA"), wx.OK)
+
+	def showInformations(self):
+		from synthDrivers.vocalizerAutomotive import _config
+		_config.load()
+		licenseInfo = getLicenseInfo()
+		if licenseInfo.startswith("licensed"):
+			return
+		elif licenseInfo == "expired":
+			lastReportTime = _config.vocalizerConfig['demo_expired_reported_time']
+			# If reported less than one day ago, don't bother the user.
+			if (lastReportTime + 3600 * 24) > time.time():
+				return
+			wx.CallLater(2000, gui.messageBox,
+			_("The Nuance Vocalizer for NVDA demonstration license has expired.\n"
+			"To buy a  license for Nuance Vocalizer for NVDA, please visit {url}, or contact an authorized distributor.\n"
+			"Note that a percentage of the license's price is donated to NV Access, ltd, to help continuing the development of the NVDA screen reader.").format(url=URL),
+			_("Vocalizer Demo Expired"))
+			_config.vocalizerConfig['demo_expired_reported_time'] = time.time()
+			_config.save()
+		elif licenseInfo == "invalid":
+			wx.CallLater(2000, gui.messageBox,
+			_("The Vocalizer license you are trying to use is invalid.\n"
+			"This might be happening due to one of two reasons:\n"
+			"1. The license file is damaged or is not a valid license file.\n"
+			"2. The license was disabled for security reasons, due to illegal use or its data beeing compromized.\n"
+			"If you own a license for Nuance Vocalizer for NVDA, please contact Tiflotecnia, lda. or your local distributor, so the problem can be further investigated.\n"
+			"If this Nuance Vocalizer for NVDA license file doesn't belong to you should reframe from using this product.\n"
+			"Unauthorized use of this product (i.g. without a valid license) is not allowed by most international laws on software rights.\n"
+			"Please note that a proportion of the price of Nuance Vocalizer for NVDA is donated for continuing NVDA's development.\n"
+			"By sharing license files you are working against NVDA and good and cheap accessibility for the blind across the world.\n"
+			"Further more, Nuance Vocalizer for NVDA is priced at the lowest value possible, to allow as many people as possible to have a comercial quality syntheciser in NVDA.\n"
+			"Please think twice about it.\n"
+			"You can remove this invalid license using  the Vocalizer menu."),
+			caption=_("Vocalizer License is Invalid."))
+		elif licenseInfo.startswith("demo"):
+			t = int(licenseInfo.split(":")[1])
+			d  = datetime.datetime.fromtimestamp(t)
+			dateStr = d.strftime("%Y-%m-%d")
+			lastReportedTime = _config.vocalizerConfig['demo_license_reported_time']
+			if (lastReportedTime + 3600 * 24) > time.time():
+				return
+			wx.CallLater(2000, gui.messageBox,
+			_("You are running a demo version of Nuance Vocalizer for NVDA.\n"
+			"This demo will expire on {date}. To use the syntheciser after that,\n"
+			"You must buy a license. You can do so at any time visiting {url} or contacting a local distributor.\n"
+			"Thanks for testing Nuance Vocalizer for NVDA.").format(url=URL, date=dateStr),
+			_("Vocalizer Demo Version"))
+			_config.vocalizerConfig['demo_license_reported_time'] = time.time()
+			_config.save()
+
+	def onNoVoicesInstalled(self):
+		if gui.messageBox(_("You have no Vocalizer voices installed.\n"
+		"You need at least one voice installed to use Vocalizer for NVDA.\n"
+		"You can download all Vocalizer voices from the product web page.\n"
+		"Would you want to open the vocalizer for NVDA voices download page now?"),
+		caption=_("No voices installed."), style=wx.YES_NO|wx.ICON_WARNING) == wx.YES:
+			self._openVoicesDownload()
+
+	def  terminate(self):
+		if not self._running:
+			return
+		try:
+			self.removeMenu()
+		except wx.PyDeadObjectError:
+			pass

@@ -2,8 +2,6 @@
 #A part of the vocalizer driver for NVDA (Non Visual Desktop Access)
 #Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
-#Copyright (C) 2026 DJ Graco and Kazek5p.
-#Modified by DJ Graco and Kazek5p on 2026-08-05.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
@@ -141,13 +139,8 @@ class VoiceManager(object):
 		return None
 
 	def _getConfiguredVoiceNameForLanguage(self, language):
-		autoSwitching = _config.vocalizerConfig['autoLanguageSwitching']
-		if language in autoSwitching:
-			return autoSwitching[language]['voice']
-		if '_' in language:
-			baseLanguage = language.split('_', 1)[0]
-			if baseLanguage in autoSwitching:
-				return autoSwitching[baseLanguage]['voice']
+		if language in _config.vocalizerConfig['autoLanguageSwitching']:
+			return _config.vocalizerConfig['autoLanguageSwitching'][language]['voice']
 		return None
 
 	def onVoiceLoad(self, voiceName, instance):

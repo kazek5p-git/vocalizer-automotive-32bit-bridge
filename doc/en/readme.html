@@ -1,65 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="../style.css" media="screen">
-<title>Vocalizer Automotive 5.5 Driver</title>
+<title>Vocalizer Automotive 5.5 Driver 2.1.6</title>
 </head>
 <body>
-<h1>Vocalizer Automotive 5.5 Driver</h1>
-<p>This add-on adapts the legacy 32-bit Nuance Vocalizer Automotive 5.5
-driver for both 32-bit and 64-bit NVDA.</p>
-<p>On 32-bit NVDA, the original Automotive driver is loaded directly. On
-64-bit NVDA, the bridge runs it in NVDA's dedicated 32-bit synthesizer host.
-The method used to route speech audio depends on the installed variant:
-standard or brokered audio.</p>
 
-
-<h2>Installation</h2>
-<ol>
-<li>Install the add-on.</li>
-<li>Install your voice add-ons separately.</li>
-<li>Use <strong>NVDA menu &gt; Vocalizer Automotive</strong>
-to enter the license and configure automatic language switching.</li>
-<li>Restart NVDA and select <code>vocalizerAutomotive</code> on 32-bit NVDA,
-or <code>vocalizerAutomotive32</code> on 64-bit NVDA.</li>
-</ol>
-<p>The license file is not included in the package and must be imported from
-your own licensed copy.</p>
-
-<h2>Audio processing</h2>
-<p>The standard variant uses the classic NVDA compatibility bridge on 64-bit
-NVDA. On 32-bit NVDA, Automotive uses its native direct path. Sonic Pitch does
-not work with the standard variant.</p>
-<p>For audio routed through the main NVDA process, native NVDA audio ducking
-and Sonic Pitch compatibility on supported 64-bit NVDA versions, install the
-brokered-audio variant.</p>
-
-<h2>Available variants</h2>
-<ul>
-<li><strong>Standard variant:</strong> uses the classic compatibility bridge
-on 64-bit NVDA 2026.1 and newer, and the native direct path on 32-bit NVDA.</li>
-<li><strong>Brokered-audio variant:</strong> routes speech audio through the
-main NVDA process on 64-bit NVDA 2026.2 and newer, and uses the native direct
-path on 32-bit NVDA.</li>
-</ul>
-<p>Install only one variant at a time.</p>
-
-<h2>Automatic language switching</h2>
-<p>The settings dialog detects installed voices from their <code>.hdr</code>
-metadata and stores the selected mapping in
-<code>%APPDATA%\nvda\vocalizer.ini</code>.</p>
-
-<h2>Translations</h2>
-<p>The add-on interface includes the original translations for locales
-<code>an</code>, <code>ar</code>, <code>da</code>, <code>de</code>,
-<code>el</code>, <code>es</code>, <code>fi</code>, <code>fr</code>,
-<code>gl</code>, <code>hr</code>, <code>hu</code>, <code>it</code>,
-<code>ja</code>, <code>ko</code>, <code>nb_NO</code>, <code>ne</code>,
-<code>nl</code>, <code>pl</code>, <code>pt_BR</code>, <code>pt_PT</code>,
-<code>ru</code>, <code>sk</code>, <code>sl</code>, <code>tr</code> and
-<code>zh_CN</code>. HTML documentation is available in English, Polish and
-Slovak.</p>
 </body>
 </html>

@@ -3,8 +3,6 @@
 #Copyright (C) 2012 Rui Batista <ruiandrebatista@gmail.com>
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
 #Copyright (C) 2019 Leonard de Ruijter (Babbage B.V.) <leonard@babbage.com>
-#Copyright (C) 2026 DJ Graco and Kazek5p.
-#Modified by DJ Graco and Kazek5p on 2026-08-04.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
@@ -12,12 +10,8 @@
 from collections import OrderedDict
 import math
 import operator
-import os
-try:
-	import addonHandler
-except ImportError:
-	# The NVDA 32-bit synth host intentionally exposes a reduced module set.
-	addonHandler = None
+import wx
+import addonHandler
 from synthDriverHandler import SynthDriver as BaseDriver, VoiceInfo, synthIndexReached, synthDoneSpeaking
 import languageHandler
 from logHandler import log
@@ -27,33 +21,7 @@ from . import _languages
 from . import _vocalizer
 from ._voiceManager import VoiceManager
 
-
-def _getDriverVersion():
-	if addonHandler is not None:
-		try:
-			return addonHandler.getCodeAddon().manifest["version"]
-		except Exception:
-			pass
-
-	# The 32-bit synth host imports this package outside the add-on manager.
-	manifestPath = os.path.abspath(
-		os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, "manifest.ini")
-	)
-	try:
-		with open(manifestPath, "r", encoding="utf-8-sig") as manifestFile:
-			for line in manifestFile:
-				key, separator, value = line.partition("=")
-				if separator and key.strip().lower() == "version":
-					version = value.strip().strip('"\'')
-					if version:
-						return version
-					break
-	except (OSError, UnicodeError):
-		pass
-	return "unknown"
-
-
-driverVersion = _getDriverVersion()
+driverVersion = addonHandler.getCodeAddon().manifest['version']
 synthVersion = "5.5" # It would be great if the synth reported that...
 
 voiceModelNames = {"full_vssq5f22" : "Premium High",
