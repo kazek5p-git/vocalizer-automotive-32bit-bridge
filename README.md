@@ -1,5 +1,7 @@
 # Vocalizer Automotive 2.1.6 – NVDA 2025 compatibility branch
 
+[Polski](README.pl.md) | [Slovenčina](README.sk.md) | English
+
 This branch preserves the original native 32-bit Vocalizer Automotive 5.5
 driver released by Tiflotecnia as version 2.1.6, with a small compatibility
 fix for NVDA 2025.x.
