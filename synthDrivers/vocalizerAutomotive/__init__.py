@@ -4,7 +4,7 @@
 #Copyright (C) 2012 - 2023 Tiflotecnia, lda. <www.tiflotecnia.net>
 #Copyright (C) 2019 Leonard de Ruijter (Babbage B.V.) <leonard@babbage.com>
 #Copyright (C) 2026 DJ Graco and Kazek5p.
-#Modified by DJ Graco and Kazek5p on 2026-08-04.
+#Modified by DJ Graco on 2026-08-04.
 #This file is covered by the GNU General Public License.
 #See the file GPL.txt for more details.
 
