@@ -7,6 +7,7 @@ from pathlib import Path
 
 SOURCE_PATH = (
 	Path(__file__).resolve().parents[1]
+	/ "addon"
 	/ "synthDrivers"
 	/ "vocalizerAutomotive"
 	/ "__init__.py"
@@ -49,7 +50,7 @@ class DriverVersionTests(unittest.TestCase):
 
 	def test_unknown_is_used_instead_of_a_hard_coded_historical_version(self):
 		missingSource = (
-			SOURCE_PATH.parents[2] / "tests" / "missing" / "deeper" / "driver.py"
+			SOURCE_PATH.parents[3] / "tests" / "missing" / "deeper" / "driver.py"
 		)
 		self.assertEqual(_load_version_function(None, missingSource)(), "unknown")
 		self.assertNotIn("2.1.6-2025.05.12", SOURCE_PATH.read_text(encoding="utf-8"))

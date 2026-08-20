@@ -9,8 +9,12 @@ Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $repositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path.TrimEnd("\")
+$addonRoot = Join-Path $repositoryRoot "addon"
+if (-not (Test-Path -LiteralPath $addonRoot -PathType Container)) {
+    throw "Add-on payload directory not found: $addonRoot"
+}
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
-$manifestPath = Join-Path $repositoryRoot "manifest.ini"
+$manifestPath = Join-Path $addonRoot "manifest.ini"
 $manifestText = Get-Content -LiteralPath $manifestPath -Raw
 $versionMatch = [regex]::Match($manifestText, '(?m)^version\s*=\s*(.+)$')
 if (-not $versionMatch.Success) {
@@ -28,8 +32,8 @@ $archive = [System.IO.Compression.ZipFile]::Open(
     [System.IO.Compression.ZipArchiveMode]::Create
 )
 try {
-    Get-ChildItem -LiteralPath $repositoryRoot -Recurse -File -Force | ForEach-Object {
-        $relative = $_.FullName.Substring($repositoryRoot.Length + 1)
+    Get-ChildItem -LiteralPath $addonRoot -Recurse -File -Force | ForEach-Object {
+        $relative = $_.FullName.Substring($addonRoot.Length + 1)
         $parts = $relative -split "\\"
         if ($parts | Where-Object { $_ -in @(".git", "dist", "tools", "tests", "__pycache__") }) {
             return

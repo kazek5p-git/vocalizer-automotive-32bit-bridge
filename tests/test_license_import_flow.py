@@ -10,6 +10,7 @@ from unittest import mock
 
 SOURCE_PATH = (
 	Path(__file__).resolve().parents[1]
+	/ "addon"
 	/ "globalPlugins"
 	/ "vocalizer_automotive_globalPlugin"
 	/ "__init__.py"
@@ -132,7 +133,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 		) = self._load_plugin()
 		try:
 			with tempfile.TemporaryDirectory(
-				dir=SOURCE_PATH.parents[2] / "tests"
+				dir=SOURCE_PATH.parents[3] / "tests"
 			) as tempDir:
 				sourcePath = Path(tempDir) / "source.ini"
 				targetPath = Path(tempDir) / "vocalizer_license.ini"
@@ -209,7 +210,7 @@ class LicenseImportFlowTests(unittest.TestCase):
 		) = self._load_plugin()
 		try:
 			with tempfile.TemporaryDirectory(
-				dir=SOURCE_PATH.parents[2] / "tests"
+				dir=SOURCE_PATH.parents[3] / "tests"
 			) as tempDir:
 				sourcePath = Path(tempDir) / "source.ini"
 				targetPath = Path(tempDir) / "vocalizer_license.ini"
