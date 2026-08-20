@@ -65,4 +65,4 @@ or supported by Tiflotecnia.
 ## License
 
 The NVDA driver source is distributed under the GNU General Public License
-as described in `gpl.txt`.
+as described in `addon/gpl.txt`.

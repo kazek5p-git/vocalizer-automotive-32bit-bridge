@@ -69,4 +69,4 @@ ani wspierany przez Tiflotecnię.
 ## Licencja
 
 Kod źródłowy sterownika NVDA jest rozpowszechniany na warunkach GNU General
-Public License zgodnie z plikiem [gpl.txt](gpl.txt).
+Public License zgodnie z plikiem [gpl.txt](addon/gpl.txt).

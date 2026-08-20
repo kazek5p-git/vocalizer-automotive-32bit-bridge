@@ -69,4 +69,4 @@ ani nepodporuje.
 ## Licencia
 
 Zdrojový kód ovládača NVDA je distribuovaný pod GNU General Public License
-podľa súboru [gpl.txt](gpl.txt).
+podľa súboru [gpl.txt](addon/gpl.txt).
