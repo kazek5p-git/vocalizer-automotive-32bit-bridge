@@ -5,6 +5,7 @@ from pathlib import Path
 
 SOURCE_PATH = (
 	Path(__file__).resolve().parents[1]
+	/ "addon"
 	/ "globalPlugins"
 	/ "vocalizer_automotive_globalPlugin"
 	/ "__init__.py"

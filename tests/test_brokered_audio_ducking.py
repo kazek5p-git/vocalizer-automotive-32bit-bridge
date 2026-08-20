@@ -4,8 +4,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BROKERED_PROXY = ROOT / "synthDrivers" / "_automotiveBrokeredProxy32.py"
-VOCALIZER = ROOT / "synthDrivers" / "vocalizerAutomotive" / "_vocalizer.py"
+BROKERED_PROXY = ROOT / "addon" / "synthDrivers" / "_automotiveBrokeredProxy32.py"
+VOCALIZER = ROOT / "addon" / "synthDrivers" / "vocalizerAutomotive" / "_vocalizer.py"
 
 
 def _load_method(path, class_name, method_name):
